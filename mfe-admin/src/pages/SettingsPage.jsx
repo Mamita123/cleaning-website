@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
@@ -69,10 +70,10 @@ export default function SettingsPage() {
           color: "var(--text-heading)",
           marginBottom: "4px",
         }}>
-          ⚙️ Settings
+          {"⚙️"} {t.settingsTitle}
         </h1>
         <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
-          Manage your company information and account settings
+          {t.settingsDesc}
         </p>
       </div>
 

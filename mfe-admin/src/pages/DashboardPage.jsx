@@ -8,6 +8,7 @@ import CustomersPage  from "./CustomersPage";
 import ServicesPage   from "./ServicesPage";
 import ReviewsPage    from "./ReviewsPage";
 import SettingsPage   from "./SettingsPage";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function DashboardPage({ onLogout }) {
   const [activePage, setActivePage] = useState("dashboard");
@@ -28,17 +29,13 @@ export default function DashboardPage({ onLogout }) {
     <div style={{
       display: "flex",
       minHeight: "100vh",
-      backgroundColor: "#f9fafb",
+      backgroundColor: "var(--bg-primary)",
     }}>
-
-      {/* ✅ Only ONE AdminNav here */}
       <AdminNav
         activePage={activePage}
         onNavigate={setActivePage}
         onLogout={onLogout}
       />
-
-      {/* ✅ Page content changes here */}
       <main style={{
         flex: 1,
         padding: "32px",
@@ -47,13 +44,13 @@ export default function DashboardPage({ onLogout }) {
       }}>
         {renderPage()}
       </main>
-
     </div>
   );
 }
 
-// ✅ Dashboard home — shown when Dashboard is active
 function DashboardHome() {
+  const { t, language } = useLanguage();
+
   return (
     <>
       <div style={{
@@ -68,25 +65,28 @@ function DashboardHome() {
           <h1 style={{
             fontSize: "clamp(1.5rem, 3vw, 2rem)",
             fontWeight: "800",
-            color: "#134e4a",
+            color: "var(--text-heading)",
             marginBottom: "4px",
           }}>
-            Good morning, Admin! 👋
+            {t.goodMorning} 👋
           </h1>
-          <p style={{ fontSize: "14px", color: "#6b7280" }}>
-            Here is what is happening today.
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+            {t.happeningToday}
           </p>
         </div>
+
         <div style={{
-          backgroundColor: "white",
+          backgroundColor: "var(--bg-card)",
           padding: "10px 20px",
           borderRadius: "12px",
           fontSize: "14px",
           fontWeight: "600",
-          color: "#374151",
+          color: "var(--text-primary)",
           boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+          border: "1px solid var(--border-color)",
         }}>
-          📅 {new Date().toLocaleDateString("en-GB", {
+          
+          {"📅"} {new Date().toLocaleDateString(language === "fi" ? "fi-FI" : "en-GB", {
             weekday: "long",
             day: "numeric",
             month: "long",

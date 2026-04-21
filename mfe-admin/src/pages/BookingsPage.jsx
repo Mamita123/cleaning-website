@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useLanguage } from "../hooks/useLanguage";
 
-// ✅ Status badge colors
 const statusColors = {
   confirmed: { bg: "#dcfce7", color: "#059669" },
   pending:   { bg: "#fef3c7", color: "#d97706" },
@@ -8,7 +8,6 @@ const statusColors = {
   cancelled: { bg: "#fee2e2", color: "#dc2626" },
 };
 
-// ✅ Service label mapping
 const serviceLabels = {
   regular:   "Regular Home Cleaning",
   deep:      "Deep Cleaning",
@@ -18,14 +17,26 @@ const serviceLabels = {
   window:    "Window Cleaning",
 };
 
+const serviceLabelsfi = {
+  regular:   "Kotisiivous",
+  deep:      "Syvasiivous",
+  office:    "Toimistosiivous",
+  moveinout: "Muuttosaately",
+  eco:       "Ymparistoystavallinen",
+  window:    "Ikkunanpesu",
+};
+
 export default function BookingsPage() {
+  const { t, language } = useLanguage();
   const [bookings, setBookings] = useState([]);
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState("");
   const [filter,   setFilter]   = useState("all");
   const [search,   setSearch]   = useState("");
 
-  // ✅ Fetch all bookings from backend
+  // ✅ Use correct service labels based on language
+  const labels = language === "fi" ? serviceLabelsfi : serviceLabels;
+
   useEffect(() => { fetchBookings(); }, []);
 
   const fetchBookings = async () => {
@@ -37,15 +48,14 @@ export default function BookingsPage() {
       });
       const data = await response.json();
       if (data.success) setBookings(data.data);
-      else setError("Failed to load bookings");
+      else setError(t.failedLoad);
     } catch {
-      setError("Cannot connect to server");
+      setError(t.cannotConnect);
     } finally {
       setLoading(false);
     }
   };
 
-  // ✅ Update booking status
   const updateStatus = async (id, newStatus) => {
     try {
       const token    = localStorage.getItem("adminToken");
@@ -67,13 +77,15 @@ export default function BookingsPage() {
         );
       }
     } catch {
-      alert("Failed to update status");
+      alert(t.cannotConnect);
     }
   };
 
-  // ✅ Delete booking
   const deleteBooking = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this booking?")) return;
+    const confirmMsg = language === "fi"
+      ? "Haluatko varmasti poistaa taman varauksen?"
+      : "Are you sure you want to delete this booking?";
+    if (!window.confirm(confirmMsg)) return;
     try {
       const token = localStorage.getItem("adminToken");
       await fetch(`http://localhost:5000/api/bookings/${id}`, {
@@ -82,11 +94,28 @@ export default function BookingsPage() {
       });
       setBookings(prev => prev.filter(b => b.id !== id));
     } catch {
-      alert("Failed to delete booking");
+      alert(t.cannotConnect);
     }
   };
 
-  // ✅ Filter and search bookings
+  // ✅ Filter tabs
+  const filterTabs = [
+    { key: "all",       label: t.all },
+    { key: "pending",   label: t.pending },
+    { key: "confirmed", label: t.confirmed },
+    { key: "completed", label: t.completed },
+    { key: "cancelled", label: t.cancelled },
+  ];
+
+  // ✅ Stats
+  const statsData = [
+    { label: t.total,     value: bookings.length,                                        color: "#f0fdf9" },
+    { label: t.pending,   value: bookings.filter(b => b.status === "pending").length,    color: "#fef3c7" },
+    { label: t.confirmed, value: bookings.filter(b => b.status === "confirmed").length,  color: "#dcfce7" },
+    { label: t.completed, value: bookings.filter(b => b.status === "completed").length,  color: "#e0f2fe" },
+  ];
+
+  // ✅ Filter and search
   const filtered = bookings
     .filter(b => filter === "all" || b.status === filter)
     .filter(b =>
@@ -98,6 +127,7 @@ export default function BookingsPage() {
 
   return (
     <div>
+
       {/* ✅ Page header */}
       <div style={{
         display: "flex",
@@ -111,13 +141,13 @@ export default function BookingsPage() {
           <h1 style={{
             fontSize: "28px",
             fontWeight: "800",
-            color: "#134e4a",
+            color: "var(--text-heading)",
             marginBottom: "4px",
           }}>
-            📅 Bookings
+            {"📅"} {t.bookingsTitle}
           </h1>
-          <p style={{ fontSize: "14px", color: "#6b7280" }}>
-            Manage all customer bookings
+          <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
+            {t.bookingsDesc}
           </p>
         </div>
         <button
@@ -125,29 +155,28 @@ export default function BookingsPage() {
           style={{
             padding: "10px 20px",
             borderRadius: "10px",
-            border: "1px solid #e5e7eb",
-            backgroundColor: "white",
+            border: "1px solid var(--border-color)",
+            backgroundColor: "var(--bg-card)",
             cursor: "pointer",
             fontSize: "14px",
             fontWeight: "600",
-            color: "#374151",
+            color: "var(--text-primary)",
           }}
         >
-          🔄 Refresh
+          {"🔄"} {t.refresh}
         </button>
       </div>
 
-      {/* ✅ Search + filter bar */}
+      {/* ✅ Search + filter */}
       <div style={{
         display: "flex",
         gap: "12px",
         marginBottom: "24px",
         flexWrap: "wrap",
       }}>
-        {/* ✅ Search input */}
         <input
           type="text"
-          placeholder="Search by name, email or service..."
+          placeholder={t.searchBookings}
           value={search}
           onChange={e => setSearch(e.target.value)}
           style={{
@@ -155,19 +184,21 @@ export default function BookingsPage() {
             minWidth: "200px",
             padding: "10px 16px",
             borderRadius: "10px",
-            border: "1.5px solid #e5e7eb",
+            border: "1.5px solid var(--border-color)",
             fontSize: "14px",
             outline: "none",
             fontFamily: "Inter, sans-serif",
+            backgroundColor: "var(--bg-card)",
+            color: "var(--text-primary)",
           }}
         />
 
-        {/* ✅ Status filter buttons */}
+        {/* ✅ Filter tabs */}
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-          {["all", "pending", "confirmed", "completed", "cancelled"].map(f => (
+          {filterTabs.map(f => (
             <button
-              key={f}
-              onClick={() => setFilter(f)}
+              key={f.key}
+              onClick={() => setFilter(f.key)}
               style={{
                 padding: "8px 16px",
                 borderRadius: "999px",
@@ -175,12 +206,11 @@ export default function BookingsPage() {
                 fontWeight: "600",
                 border: "none",
                 cursor: "pointer",
-                backgroundColor: filter === f ? "#14b8a6" : "#f3f4f6",
-                color: filter === f ? "white" : "#4b5563",
-                textTransform: "capitalize",
+                backgroundColor: filter === f.key ? "#14b8a6" : "var(--bg-card)",
+                color: filter === f.key ? "white" : "var(--text-secondary)",
               }}
             >
-              {f}
+              {f.label}
             </button>
           ))}
         </div>
@@ -193,22 +223,25 @@ export default function BookingsPage() {
         gap: "12px",
         marginBottom: "24px",
       }}>
-        {[
-          { label: "Total",     value: bookings.length,                              color: "#f0fdf9" },
-          { label: "Pending",   value: bookings.filter(b => b.status === "pending").length,   color: "#fef3c7" },
-          { label: "Confirmed", value: bookings.filter(b => b.status === "confirmed").length, color: "#dcfce7" },
-          { label: "Completed", value: bookings.filter(b => b.status === "completed").length, color: "#e0f2fe" },
-        ].map(stat => (
+        {statsData.map(stat => (
           <div key={stat.label} style={{
             backgroundColor: stat.color,
             borderRadius: "12px",
             padding: "16px",
             textAlign: "center",
           }}>
-            <div style={{ fontSize: "24px", fontWeight: "800", color: "#134e4a" }}>
+            <div style={{
+              fontSize: "24px",
+              fontWeight: "800",
+              color: "#134e4a",
+            }}>
               {stat.value}
             </div>
-            <div style={{ fontSize: "13px", color: "#6b7280", fontWeight: "500" }}>
+            <div style={{
+              fontSize: "13px",
+              color: "#6b7280",
+              fontWeight: "500",
+            }}>
               {stat.label}
             </div>
           </div>
@@ -217,17 +250,25 @@ export default function BookingsPage() {
 
       {/* ✅ Bookings table */}
       <div style={{
-        backgroundColor: "white",
+        backgroundColor: "var(--bg-card)",
         borderRadius: "20px",
         padding: "24px",
         boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+        border: "1px solid var(--border-color)",
       }}>
+
+        {/* ✅ Loading */}
         {loading && (
-          <div style={{ textAlign: "center", padding: "48px", color: "#6b7280" }}>
-            ⏳ Loading bookings...
+          <div style={{
+            textAlign: "center",
+            padding: "48px",
+            color: "var(--text-secondary)",
+          }}>
+            {"⏳"} {t.loading}
           </div>
         )}
 
+        {/* ✅ Error */}
         {error && (
           <div style={{
             backgroundColor: "#fef2f2",
@@ -236,17 +277,23 @@ export default function BookingsPage() {
             borderRadius: "10px",
             marginBottom: "16px",
           }}>
-            ❌ {error}
+            {"❌"} {error}
           </div>
         )}
 
+        {/* ✅ Empty state */}
         {!loading && filtered.length === 0 && (
-          <div style={{ textAlign: "center", padding: "48px", color: "#6b7280" }}>
+          <div style={{
+            textAlign: "center",
+            padding: "48px",
+            color: "var(--text-secondary)",
+          }}>
             <div style={{ fontSize: "3rem", marginBottom: "12px" }}>📅</div>
-            <div style={{ fontWeight: "600" }}>No bookings found</div>
+            <div style={{ fontWeight: "600" }}>{t.noBookings}</div>
           </div>
         )}
 
+        {/* ✅ Table */}
         {!loading && filtered.length > 0 && (
           <div style={{ overflowX: "auto" }}>
             <table style={{
@@ -255,15 +302,15 @@ export default function BookingsPage() {
               fontSize: "13px",
             }}>
               <thead>
-                <tr style={{ borderBottom: "2px solid #f3f4f6" }}>
-                  {["ID", "Customer", "Service", "Date & Time",
-                    "Address", "Status", "Amount", "Actions"].map(h => (
+                <tr style={{ borderBottom: "2px solid var(--border-color)" }}>
+                  {[t.id, t.customer, t.service, t.dateTime,
+                    t.address, t.status, t.amount, t.actions].map(h => (
                     <th key={h} style={{
                       padding: "10px 12px",
                       textAlign: "left",
                       fontSize: "11px",
                       fontWeight: "700",
-                      color: "#9ca3af",
+                      color: "var(--text-secondary)",
                       textTransform: "uppercase",
                       whiteSpace: "nowrap",
                     }}>
@@ -277,28 +324,74 @@ export default function BookingsPage() {
                   <tr
                     key={booking.id}
                     style={{
-                      borderBottom: "1px solid #f9fafb",
-                      backgroundColor: i % 2 === 0 ? "white" : "#fafafa",
+                      borderBottom: "1px solid var(--border-color)",
+                      backgroundColor: i % 2 === 0
+                        ? "var(--bg-card)"
+                        : "var(--bg-primary)",
                     }}
                   >
-                    <td style={{ padding: "14px 12px", fontWeight: "700", color: "#0d9488" }}>
-                      #{booking.id}
+                    {/* ✅ ID */}
+                    <td style={{
+                      padding: "14px 12px",
+                      fontWeight: "700",
+                      color: "#0d9488",
+                    }}>
+                      {"#"}{booking.id}
                     </td>
+
+                    {/* ✅ Customer */}
                     <td style={{ padding: "14px 12px" }}>
-                      <div style={{ fontWeight: "600", color: "#111827" }}>{booking.name}</div>
-                      <div style={{ fontSize: "12px", color: "#6b7280" }}>{booking.email}</div>
+                      <div style={{
+                        fontWeight: "600",
+                        color: "var(--text-primary)",
+                      }}>
+                        {booking.name}
+                      </div>
+                      <div style={{
+                        fontSize: "12px",
+                        color: "var(--text-secondary)",
+                      }}>
+                        {booking.email}
+                      </div>
                       {booking.phone && (
-                        <div style={{ fontSize: "12px", color: "#6b7280" }}>{booking.phone}</div>
+                        <div style={{
+                          fontSize: "12px",
+                          color: "var(--text-secondary)",
+                        }}>
+                          {booking.phone}
+                        </div>
                       )}
                     </td>
-                    <td style={{ padding: "14px 12px", color: "#4b5563" }}>
-                      {serviceLabels[booking.service] || booking.service}
+
+                    {/* ✅ Service — translated */}
+                    <td style={{
+                      padding: "14px 12px",
+                      color: "var(--text-secondary)",
+                    }}>
+                      {labels[booking.service] || booking.service}
                     </td>
-                    <td style={{ padding: "14px 12px", color: "#4b5563", whiteSpace: "nowrap" }}>
+
+                    {/* ✅ Date & Time */}
+                    <td style={{
+                      padding: "14px 12px",
+                      color: "var(--text-secondary)",
+                      whiteSpace: "nowrap",
+                    }}>
                       <div>{booking.date}</div>
-                      <div style={{ fontSize: "12px", color: "#9ca3af" }}>{booking.time}</div>
+                      <div style={{
+                        fontSize: "12px",
+                        color: "var(--text-secondary)",
+                      }}>
+                        {booking.time}
+                      </div>
                     </td>
-                    <td style={{ padding: "14px 12px", color: "#4b5563", maxWidth: "160px" }}>
+
+                    {/* ✅ Address */}
+                    <td style={{
+                      padding: "14px 12px",
+                      color: "var(--text-secondary)",
+                      maxWidth: "160px",
+                    }}>
                       <div style={{
                         fontSize: "12px",
                         overflow: "hidden",
@@ -308,6 +401,8 @@ export default function BookingsPage() {
                         {booking.address}
                       </div>
                     </td>
+
+                    {/* ✅ Status */}
                     <td style={{ padding: "14px 12px" }}>
                       <span style={{
                         backgroundColor: statusColors[booking.status]?.bg,
@@ -318,59 +413,95 @@ export default function BookingsPage() {
                         borderRadius: "999px",
                         textTransform: "capitalize",
                       }}>
-                        {booking.status}
+                        {booking.status === "pending"   ? t.pending   :
+                         booking.status === "confirmed" ? t.confirmed :
+                         booking.status === "completed" ? t.completed :
+                         booking.status === "cancelled" ? t.cancelled :
+                         booking.status}
                       </span>
                     </td>
-                    <td style={{ padding: "14px 12px", fontWeight: "700", color: "#059669" }}>
+
+                    {/* ✅ Amount */}
+                    <td style={{
+                      padding: "14px 12px",
+                      fontWeight: "700",
+                      color: "#059669",
+                    }}>
                       {booking.amount}
                     </td>
+
+                    {/* ✅ Actions */}
                     <td style={{ padding: "14px 12px" }}>
-                      <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+                      <div style={{
+                        display: "flex",
+                        gap: "4px",
+                        flexWrap: "wrap",
+                      }}>
                         {booking.status === "pending" && (
                           <button
                             onClick={() => updateStatus(booking.id, "confirmed")}
                             style={{
-                              padding: "4px 8px", borderRadius: "6px", border: "none",
-                              cursor: "pointer", fontSize: "11px", fontWeight: "600",
-                              backgroundColor: "#dcfce7", color: "#059669",
+                              padding: "4px 8px",
+                              borderRadius: "6px",
+                              border: "none",
+                              cursor: "pointer",
+                              fontSize: "11px",
+                              fontWeight: "600",
+                              backgroundColor: "#dcfce7",
+                              color: "#059669",
                             }}
                           >
-                            ✓ Confirm
+                            {"✓"} {t.confirm}
                           </button>
                         )}
                         {booking.status === "confirmed" && (
                           <button
                             onClick={() => updateStatus(booking.id, "completed")}
                             style={{
-                              padding: "4px 8px", borderRadius: "6px", border: "none",
-                              cursor: "pointer", fontSize: "11px", fontWeight: "600",
-                              backgroundColor: "#e0f2fe", color: "#2563eb",
+                              padding: "4px 8px",
+                              borderRadius: "6px",
+                              border: "none",
+                              cursor: "pointer",
+                              fontSize: "11px",
+                              fontWeight: "600",
+                              backgroundColor: "#e0f2fe",
+                              color: "#2563eb",
                             }}
                           >
-                            ✓ Done
+                            {"✓"} {t.done}
                           </button>
                         )}
                         {booking.status !== "cancelled" && (
                           <button
                             onClick={() => updateStatus(booking.id, "cancelled")}
                             style={{
-                              padding: "4px 8px", borderRadius: "6px", border: "none",
-                              cursor: "pointer", fontSize: "11px", fontWeight: "600",
-                              backgroundColor: "#fee2e2", color: "#dc2626",
+                              padding: "4px 8px",
+                              borderRadius: "6px",
+                              border: "none",
+                              cursor: "pointer",
+                              fontSize: "11px",
+                              fontWeight: "600",
+                              backgroundColor: "#fee2e2",
+                              color: "#dc2626",
                             }}
                           >
-                            ✕ Cancel
+                            {"✕"} {t.cancel}
                           </button>
                         )}
                         <button
                           onClick={() => deleteBooking(booking.id)}
                           style={{
-                            padding: "4px 8px", borderRadius: "6px", border: "none",
-                            cursor: "pointer", fontSize: "11px", fontWeight: "600",
-                            backgroundColor: "#f3f4f6", color: "#6b7280",
+                            padding: "4px 8px",
+                            borderRadius: "6px",
+                            border: "none",
+                            cursor: "pointer",
+                            fontSize: "11px",
+                            fontWeight: "600",
+                            backgroundColor: "var(--bg-primary)",
+                            color: "var(--text-secondary)",
                           }}
                         >
-                          🗑
+                          {"🗑"}
                         </button>
                       </div>
                     </td>

@@ -1,41 +1,40 @@
 import React from "react";
-
-const stats = [
-  {
-    emoji: "📅",
-    label: "Total Bookings",
-    value: "248",
-    change: "+12% this month",
-    color: "#f0fdf9",
-    accent: "#0d9488",
-  },
-  {
-    emoji: "💰",
-    label: "Total Revenue",
-    value: "€18,540",
-    change: "+8% this month",
-    color: "#e0f2fe",
-    accent: "#2563eb",
-  },
-  {
-    emoji: "👥",
-    label: "Active Customers",
-    value: "184",
-    change: "+5 new this week",
-    color: "#fef3c7",
-    accent: "#d97706",
-  },
-  {
-    emoji: "⭐",
-    label: "Average Rating",
-    value: "4.9",
-    change: "Based on 2,000 reviews",
-    color: "#ede9fe",
-    accent: "#7c3aed",
-  },
-];
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function StatsCards() {
+  const { t } = useLanguage();
+
+  const stats = [
+    {
+      emoji: "📅",
+      label: t.totalBookings,
+      value: "248",
+      change: t.thisMonth,
+      accent: "#0d9488",
+    },
+    {
+      emoji: "💰",
+      label: t.totalRevenue,
+      value: "€18,540",
+      change: t.thisMonth,
+      accent: "#2563eb",
+    },
+    {
+      emoji: "👥",
+      label: t.activeCustomers,
+      value: "184",
+      change: t.thisWeek,
+      accent: "#d97706",
+    },
+    {
+      emoji: "⭐",
+      label: t.averageRating,
+      value: "4.9",
+      change: t.basedOn,
+      accent: "#7c3aed",
+    },
+  ];
+
   return (
     <div style={{
       display: "grid",
@@ -45,7 +44,6 @@ export default function StatsCards() {
     }}>
       {stats.map((stat) => (
         <div key={stat.label} style={{
-          // ✅ Uses CSS variable for card background
           backgroundColor: "var(--bg-card)",
           borderRadius: "16px",
           padding: "24px",
@@ -67,7 +65,7 @@ export default function StatsCards() {
               padding: "2px 8px",
               borderRadius: "999px",
             }}>
-              ↑
+              {"↑"}
             </span>
           </div>
           <div style={{

@@ -1,39 +1,63 @@
 import React from "react";
-
-const activities = [
-  {
-    emoji: "📅",
-    text: "New booking from Sarah M.",
-    sub: "Regular Home Cleaning — €49",
-    time: "2 mins ago",
-  },
-  {
-    emoji: "✅",
-    text: "Booking BK003 confirmed",
-    sub: "Office Cleaning for Lisa T.",
-    time: "15 mins ago",
-  },
-  {
-    emoji: "⭐",
-    text: "New 5-star review received",
-    sub: "From James K. — Deep Cleaning",
-    time: "1 hour ago",
-  },
-  {
-    emoji: "👤",
-    text: "New customer registered",
-    sub: "Anna P. — Helsinki",
-    time: "2 hours ago",
-  },
-  {
-    emoji: "💰",
-    text: "Payment received — €129",
-    sub: "Move Out Cleaning — Tom R.",
-    time: "3 hours ago",
-  },
-];
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function RecentActivity() {
+  const { t, language } = useLanguage();
+
+  // ✅ Activities defined inside component so they re-render on language change
+  const activities = [
+    {
+      emoji: "📅",
+      text: language === "fi"
+        ? "Uusi varaus Sarah M.:lta"
+        : "New booking from Sarah M.",
+      sub: language === "fi"
+        ? "Kotisiivous — 49 euroa"
+        : "Regular Home Cleaning — €49",
+      time: "2 mins ago",
+    },
+    {
+      emoji: "✅",
+      text: language === "fi"
+        ? "Varaus BK003 vahvistettu"
+        : "Booking BK003 confirmed",
+      sub: language === "fi"
+        ? "Toimistosiivous Lisa T.:lle"
+        : "Office Cleaning for Lisa T.",
+      time: "15 mins ago",
+    },
+    {
+      emoji: "⭐",
+      text: language === "fi"
+        ? "Uusi 5 tahden arvostelu"
+        : "New 5-star review received",
+      sub: language === "fi"
+        ? "James K.:lta — Syvasiivous"
+        : "From James K. — Deep Cleaning",
+      time: "1 hour ago",
+    },
+    {
+      emoji: "👤",
+      text: language === "fi"
+        ? "Uusi asiakas rekisteroitynyt"
+        : "New customer registered",
+      sub: language === "fi"
+        ? "Anna P. — Helsinki"
+        : "Anna P. — Helsinki",
+      time: "2 hours ago",
+    },
+    {
+      emoji: "💰",
+      text: language === "fi"
+        ? "Maksu vastaanotettu — 129 euroa"
+        : "Payment received — €129",
+      sub: language === "fi"
+        ? "Muuttosaately — Tom R."
+        : "Move Out Cleaning — Tom R.",
+      time: "3 hours ago",
+    },
+  ];
+
   return (
     <div style={{
       backgroundColor: "var(--bg-card)",
@@ -48,7 +72,7 @@ export default function RecentActivity() {
         color: "var(--text-heading)",
         marginBottom: "20px",
       }}>
-        Recent Activity
+        {t.recentActivity}
       </h3>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>

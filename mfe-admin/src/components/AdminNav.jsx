@@ -1,35 +1,45 @@
 import React from "react";
-
-const navItems = [
-  { icon: "📊", label: "Dashboard",  key: "dashboard" },
-  { icon: "📅", label: "Bookings",   key: "bookings"  },
-  { icon: "👥", label: "Customers",  key: "customers" },
-  { icon: "🧹", label: "Services",   key: "services"  },
-  { icon: "⭐", label: "Reviews",    key: "reviews"   },
-  { icon: "⚙️", label: "Settings",   key: "settings"  },
-];
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function AdminNav({ activePage, onNavigate, onLogout }) {
+  const { t, language } = useLanguage();
+
+  const toggleLanguage = () => {
+    const newLang = language === "en" ? "fi" : "en";
+    localStorage.setItem("language", newLang);
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  const navItems = [
+    { icon: "📊", label: t.dashboard, key: "dashboard" },
+    { icon: "📅", label: t.bookings,  key: "bookings"  },
+    { icon: "👥", label: t.customers, key: "customers" },
+    { icon: "🧹", label: t.services,  key: "services"  },
+    { icon: "⭐", label: t.reviews,   key: "reviews"   },
+    { icon: "⚙️", label: t.settings,  key: "settings"  },
+  ];
+
   return (
     <aside style={{
-      width: "240px",
+      width: "220px",
       minHeight: "100vh",
-      // ✅ Dark sidebar — same in both modes
       backgroundColor: "#134e4a",
       display: "flex",
       flexDirection: "column",
       flexShrink: 0,
     }}>
 
-      {/* ✅ Logo */}
+      {/* ✅ Logo + Language toggle in header */}
       <div style={{
         padding: "24px 20px",
         borderBottom: "1px solid rgba(255,255,255,0.1)",
       }}>
+        {/* ✅ Logo */}
         <div style={{
           display: "flex",
           alignItems: "center",
           gap: "10px",
+          marginBottom: "16px",
         }}>
           <span style={{ fontSize: "24px" }}>🧹</span>
           <div>
@@ -45,13 +55,41 @@ export default function AdminNav({ activePage, onNavigate, onLogout }) {
               fontSize: "11px",
               fontWeight: "500",
             }}>
-              Admin Panel
+              {t.adminPanel}
             </div>
           </div>
         </div>
+
+        {/* ✅ Language toggle — in header area */}
+        <button
+          onClick={toggleLanguage}
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+            padding: "8px 12px",
+            borderRadius: "10px",
+            border: "1px solid rgba(255,255,255,0.15)",
+            cursor: "pointer",
+            backgroundColor: "rgba(255,255,255,0.05)",
+            color: "#5eead4",
+            fontSize: "13px",
+            fontWeight: "600",
+            transition: "all 0.15s",
+          }}
+        >
+          <span style={{ fontSize: "16px" }}>
+            {language === "en" ? "🇫🇮" : "🇬🇧"}
+          </span>
+          <span>
+            {language === "en" ? "Vaihda suomeksi" : "Switch to English"}
+          </span>
+        </button>
       </div>
 
-      {/* ✅ Navigation */}
+      {/* ✅ Navigation links */}
       <nav style={{ flex: 1, padding: "16px 12px" }}>
         {navItems.map((item) => (
           <button
@@ -87,32 +125,6 @@ export default function AdminNav({ activePage, onNavigate, onLogout }) {
         ))}
       </nav>
 
-      {/* ✅ Logout */}
-      <div style={{
-        padding: "16px 12px",
-        borderTop: "1px solid rgba(255,255,255,0.1)",
-      }}>
-        <button
-          onClick={onLogout}
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            gap: "12px",
-            padding: "12px 16px",
-            borderRadius: "10px",
-            border: "none",
-            cursor: "pointer",
-            backgroundColor: "rgba(239,68,68,0.15)",
-            color: "#fca5a5",
-            fontSize: "14px",
-            fontWeight: "600",
-          }}
-        >
-          <span>🚪</span>
-          <span>Logout</span>
-        </button>
-      </div>
     </aside>
   );
 }
