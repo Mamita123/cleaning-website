@@ -1,0 +1,49 @@
+/* ✅ Default = Desktop */
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  color: #374151;
+  flex-shrink: 0;
+}
+
+/* ✅ Mobile menu hidden by default */
+.nav-mobile-menu {
+  display: none;
+  border-top: 1px solid #f3f4f6;
+  padding: 8px 16px 16px;
+}
+
+.nav-mobile-menu.open {
+  display: block;
+}
+
+/* ✅ Mobile only — hide desktop nav, show hamburger */
+@media screen and (max-width: 767px) {
+  .nav-desktop {
+    display: none !important;
+  }
+  .nav-hamburger {
+    display: flex !important;
+  }
+}
+
+/* ✅ Desktop only — hide mobile controls */
+@media screen and (min-width: 768px) {
+  .mobile-only {
+    display: none !important;
+  }
+}

@@ -1,0 +1,54 @@
+/* ✅ Tailwind v4 import */
+@import "tailwindcss";
+
+/* ✅ Brand color tokens */
+@theme {
+  --color-brand-50:  #f0fdf9;
+  --color-brand-100: #ccfbef;
+  --color-brand-200: #99f6e0;
+  --color-brand-300: #5eead4;
+  --color-brand-400: #2dd4bf;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+  --font-sans: "Inter", ui-sans-serif, system-ui;
+}
+
+/* ✅ Light mode — popular plan teal background */
+:root {
+    --bg-primary:            #f9fafb;
+  --bg-secondary:          #ffffff;
+  --bg-card:               #ffffff;
+  --text-primary:          #111827;
+  --text-secondary:        #6b7280;
+  --text-heading:          #134e4a;
+  --border-color:          #f3f4f6;
+  --input-border:          #e5e7eb;
+  --pricing-popular-bg:    #0d9488;   /* ✅ teal in light mode */
+  --pricing-popular-text:  white;
+  --pricing-popular-sub:   #ccfbef;
+}
+
+
+/* ✅ Dark mode — popular plan darker background */
+html[data-theme="dark"] {
+    --bg-primary:            #0f172a;
+  --bg-secondary:          #1e293b;
+  --bg-card:               #1e293b;
+  --text-primary:          #f1f5f9;
+  --text-secondary:        #94a3b8;
+  --text-heading:          #5eead4;
+  --border-color:          #334155;
+  --input-border:          #334155;
+  --pricing-popular-bg:    #134e4a;   /* ✅ darker green in dark mode */
+  --pricing-popular-text:  #5eead4;   /* ✅ light teal text */
+  --pricing-popular-sub:   #99f6e0;   /* ✅ lighter teal subtext */
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { font-family: "Inter", sans-serif; background-color: #f9fafb; }
+  img  { max-width: 100%; height: auto; }
+}

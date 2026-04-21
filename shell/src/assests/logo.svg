@@ -1,0 +1,20 @@
+<svg width="400" height="120" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Badge square -->
+  <rect x="0" y="0" width="110" height="110" rx="18" fill="#134e4a"/>
+  <!-- Shine accent -->
+  <rect x="82" y="4" width="24" height="24" rx="12" fill="#0d9488" opacity="0.5"/>
+  <!-- J&S text inside badge -->
+  <text x="55" y="62" font-family="ui-sans-serif,system-ui,sans-serif" font-size="34" font-weight="700" fill="white" text-anchor="middle">J&amp;S</text>
+  <!-- PALVELUT below -->
+  <text x="55" y="84" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" font-weight="600" fill="#5eead4" text-anchor="middle" letter-spacing="0.1em">PALVELUT</text>
+  <!-- Divider -->
+  <line x1="126" y1="8" x2="126" y2="102" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- Company name -->
+  <text x="144" y="50" font-family="ui-sans-serif,system-ui,sans-serif" font-size="26" font-weight="700" fill="#134e4a">J &amp; S Palvelut</text>
+  <!-- Teal underline -->
+  <rect x="144" y="57" width="200" height="3" rx="2" fill="#0d9488"/>
+  <!-- Tagline -->
+  <text x="144" y="78" font-family="ui-sans-serif,system-ui,sans-serif" font-size="13" font-weight="500" fill="#0d9488" letter-spacing="0.03em">Siivouspalvelut · Helsinki</text>
+  <!-- Contact -->
+  <text x="144" y="96" font-family="ui-sans-serif,system-ui,sans-serif" font-size="10" fill="#9ca3af">Y-tunnus: 3354757-1  ·  +358 451 812 636</text>
+</svg>
