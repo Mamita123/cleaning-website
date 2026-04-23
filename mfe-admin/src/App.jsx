@@ -2,35 +2,71 @@ import React, { useState, useEffect } from "react";
 import LoginPage     from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 
-// ✅ Shell loads this as: import("mfeAdmin/AdminApp")
 export default function App() {
-  // ✅ Check if admin is already logged in
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loading,    setLoading]    = useState(true);
 
-  // ✅ Check localStorage for existing token on mount
+  // ✅ Check token on mount
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
-    if (token) setIsLoggedIn(true);
+    setIsLoggedIn(!!token);
+    setLoading(false);
   }, []);
 
-  // ✅ Handle login
-  const handleLogin = () => setIsLoggedIn(true);
+  // ✅ Listen for storage changes
+  useEffect(() => {
+    const handleStorage = () => {
+      const token = localStorage.getItem("adminToken");
+      setIsLoggedIn(!!token);
+    };
 
-  // ✅ Handle logout — clear token and go back to login
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    setIsLoggedIn(false);
+    window.addEventListener("storage", handleStorage);
+    const interval = setInterval(handleStorage, 1000);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
   };
+
+  const handleLogout = () => {
+    // ✅ Remove token
+    localStorage.removeItem("adminToken");
+    // ✅ Update state immediately
+    setIsLoggedIn(false);
+    // ✅ Notify shell navbar
+    window.dispatchEvent(new Event("storage"));
+    // ✅ Redirect to homepage
+    window.location.href = "http://localhost:3000";
+  };
+
+  // ✅ Show nothing while checking token
+  if (loading) {
+    return (
+      <div style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "var(--bg-primary)",
+        fontSize: "16px",
+        color: "#0d9488",
+      }}>
+        ⏳ Loading...
+      </div>
+    );
+  }
 
   return (
     <>
-      {isLoggedIn ? (
-        // ✅ Show dashboard if logged in
-        <DashboardPage onLogout={handleLogout} />
-      ) : (
-        // ✅ Show login if not authenticated
-        <LoginPage onLogin={handleLogin} />
-      )}
+      {isLoggedIn
+        ? <DashboardPage onLogout={handleLogout} />
+        : <LoginPage onLogin={handleLogin} />
+      }
     </>
   );
 }

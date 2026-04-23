@@ -1,25 +1,29 @@
 import React, { useState } from "react";
+import { useLanguage } from "../hooks/useLanguage";
 import Calendar  from "../components/Calendar";
 import TimeSlots from "../components/TimeSlots";
 
-const services = [
-  { value: "regular",   label: "Regular Home Cleaning",  price: "€49",  duration: "2–3 hrs" },
-  { value: "deep",      label: "Deep Cleaning",           price: "€99",  duration: "4–6 hrs" },
-  { value: "office",    label: "Office Cleaning",         price: "€79",  duration: "2–4 hrs" },
-  { value: "moveinout", label: "Move In / Move Out",      price: "€129", duration: "5–8 hrs" },
-  { value: "eco",       label: "Eco-Friendly Cleaning",   price: "€59",  duration: "2–3 hrs" },
-  { value: "window",    label: "Window Cleaning",         price: "€39",  duration: "1–2 hrs" },
-];
-
-const STEPS = ["Service", "Date & Time", "Your Details", "Confirm"];
-
 export default function BookingForm({ onConfirm }) {
+  const { t, language } = useLanguage();
   const [currentStep, setCurrentStep] = useState(0);
   const [booking, setBooking] = useState({
     service: "", date: null, time: "",
     name: "", email: "", phone: "", address: "", notes: "",
   });
   const [errors, setErrors] = useState({});
+
+  // ✅ Services using translations
+  const services = [
+    { value: "regular",   label: t.regularHome,    price: `${t.from} €49`,  duration: "2-3 h" },
+    { value: "deep",      label: t.deepCleaning,   price: `${t.from} €99`,  duration: "4-6 h" },
+    { value: "office",    label: t.officeCleaning, price: `${t.from} €79`,  duration: "2-4 h" },
+    { value: "moveinout", label: t.moveInOut,      price: `${t.from} €129`, duration: "5-8 h" },
+    { value: "eco",       label: t.ecoFriendly,    price: `${t.from} €59`,  duration: "2-3 h" },
+    { value: "window",    label: t.windowCleaning, price: `${t.from} €39`,  duration: "1-2 h" },
+  ];
+
+  // ✅ Step labels
+  const stepLabels = [t.stepService, t.stepDateTime, t.stepDetails, t.stepConfirm];
 
   const update = (field, value) => {
     setBooking(prev => ({ ...prev, [field]: value }));
@@ -28,15 +32,15 @@ export default function BookingForm({ onConfirm }) {
 
   const validateStep = () => {
     const newErrors = {};
-    if (currentStep === 0 && !booking.service) newErrors.service = "Please select a service";
+    if (currentStep === 0 && !booking.service) newErrors.service = t.selectServiceErr;
     if (currentStep === 1) {
-      if (!booking.date) newErrors.date = "Please select a date";
-      if (!booking.time) newErrors.time = "Please select a time";
+      if (!booking.date) newErrors.date = t.selectDateErr;
+      if (!booking.time) newErrors.time = t.selectTimeErr;
     }
     if (currentStep === 2) {
-      if (!booking.name.trim())    newErrors.name    = "Name is required";
-      if (!booking.email.trim())   newErrors.email   = "Email is required";
-      if (!booking.address.trim()) newErrors.address = "Address is required";
+      if (!booking.name.trim())    newErrors.name    = t.nameRequired;
+      if (!booking.email.trim())   newErrors.email   = t.emailRequired;
+      if (!booking.address.trim()) newErrors.address = t.addrRequired;
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -45,37 +49,44 @@ export default function BookingForm({ onConfirm }) {
   const nextStep = () => { if (validateStep()) setCurrentStep(p => p + 1); };
   const prevStep = () => setCurrentStep(p => p - 1);
 
+  const selectedService = services.find(s => s.value === booking.service);
+
   const handleSubmit = async () => {
     try {
       const formatted = {
         ...booking,
-        date: booking.date?.toLocaleDateString("en-GB", {
-          weekday: "long", day: "numeric",
-          month: "long", year: "numeric",
-        }),
+        date: booking.date?.toLocaleDateString(
+          language === "fi" ? "fi-FI" : "en-GB",
+          { weekday: "long", day: "numeric", month: "long", year: "numeric" }
+        ),
       };
+
       const response = await fetch("http://localhost:5000/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formatted.name, email: formatted.email,
-          phone: formatted.phone, address: formatted.address,
-          service: formatted.service, date: formatted.date,
-          time: formatted.time, notes: formatted.notes,
-          amount: selectedService?.price || "",
+          name:    formatted.name,
+          email:   formatted.email,
+          phone:   formatted.phone,
+          address: formatted.address,
+          service: formatted.service,
+          date:    formatted.date,
+          time:    formatted.time,
+          notes:   formatted.notes,
+          amount:  selectedService?.price || "",
         }),
       });
+
       const data = await response.json();
       if (!data.success) throw new Error(data.message);
       onConfirm(formatted);
+
     } catch (error) {
       alert("Booking failed: " + error.message);
     }
   };
 
-  const selectedService = services.find(s => s.value === booking.service);
-
-  // ✅ Input style using CSS variables
+  // ✅ Styles
   const inputStyle = {
     width: "100%",
     padding: "12px 14px",
@@ -101,7 +112,7 @@ export default function BookingForm({ onConfirm }) {
     <section style={{ padding: "48px 24px", backgroundColor: "var(--bg-primary)" }}>
       <div style={{ maxWidth: "720px", margin: "0 auto" }}>
 
-        {/* ✅ Step progress indicator */}
+        {/* ✅ Step progress */}
         <div style={{
           display: "flex",
           justifyContent: "space-between",
@@ -118,8 +129,8 @@ export default function BookingForm({ onConfirm }) {
             zIndex: 0,
           }} />
 
-          {STEPS.map((step, index) => (
-            <div key={step} style={{
+          {stepLabels.map((label, index) => (
+            <div key={index} style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -164,7 +175,7 @@ export default function BookingForm({ onConfirm }) {
                   : "var(--text-secondary)",
                 textAlign: "center",
               }}>
-                {step}
+                {label}
               </span>
             </div>
           ))}
@@ -181,20 +192,24 @@ export default function BookingForm({ onConfirm }) {
         }}>
 
           {/* ======================== */}
-          {/* STEP 1 — Service */}
+          {/* STEP 1 — Service        */}
           {/* ======================== */}
           {currentStep === 0 && (
             <div>
               <h2 style={{
-                fontSize: "22px", fontWeight: "800",
-                color: "var(--text-heading)", marginBottom: "8px",
+                fontSize: "22px",
+                fontWeight: "800",
+                color: "var(--text-heading)",
+                marginBottom: "8px",
               }}>
-                Choose a Service
+                {t.chooseServiceTitle}
               </h2>
               <p style={{
-                fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px",
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+                marginBottom: "24px",
               }}>
-                Select the cleaning service that best fits your needs.
+                {t.chooseServiceDesc}
               </p>
               {errors.service && (
                 <div style={{ color: "#ef4444", fontSize: "13px", marginBottom: "12px" }}>
@@ -219,18 +234,29 @@ export default function BookingForm({ onConfirm }) {
                       cursor: "pointer",
                       transition: "all 0.15s",
                       backgroundColor: booking.service === service.value
-                        ? "var(--bg-primary)" : "var(--bg-card)",
+                        ? "var(--bg-primary)"
+                        : "var(--bg-card)",
                     }}
                   >
                     <div style={{
-                      fontWeight: "700", fontSize: "14px",
-                      color: "var(--text-primary)", marginBottom: "6px",
+                      fontWeight: "700",
+                      fontSize: "14px",
+                      color: "var(--text-primary)",
+                      marginBottom: "6px",
                     }}>
                       {service.label}
                     </div>
-                    <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px" }}>
-                      <span style={{ color: "#0d9488", fontWeight: "700" }}>{service.price}</span>
-                      <span style={{ color: "var(--text-secondary)" }}>{service.duration}</span>
+                    <div style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      fontSize: "13px",
+                    }}>
+                      <span style={{ color: "#0d9488", fontWeight: "700" }}>
+                        {service.price}
+                      </span>
+                      <span style={{ color: "var(--text-secondary)" }}>
+                        {service.duration}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -239,24 +265,29 @@ export default function BookingForm({ onConfirm }) {
           )}
 
           {/* ======================== */}
-          {/* STEP 2 — Date & Time */}
+          {/* STEP 2 — Date & Time    */}
           {/* ======================== */}
           {currentStep === 1 && (
             <div>
               <h2 style={{
-                fontSize: "22px", fontWeight: "800",
-                color: "var(--text-heading)", marginBottom: "8px",
+                fontSize: "22px",
+                fontWeight: "800",
+                color: "var(--text-heading)",
+                marginBottom: "8px",
               }}>
-                Pick a Date & Time
+                {t.pickDateTitle}
               </h2>
               <p style={{
-                fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px",
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+                marginBottom: "24px",
               }}>
-                Select your preferred date and time slot. Sundays are unavailable.
+                {t.pickDateDesc}
               </p>
               <Calendar
                 selectedDate={booking.date}
                 onSelectDate={(date) => update("date", date)}
+                t={t}
               />
               {errors.date && (
                 <div style={{ color: "#ef4444", fontSize: "13px", margin: "8px 0" }}>
@@ -268,6 +299,7 @@ export default function BookingForm({ onConfirm }) {
                   <TimeSlots
                     selectedTime={booking.time}
                     onSelectTime={(time) => update("time", time)}
+                    t={t}
                   />
                   {errors.time && (
                     <div style={{ color: "#ef4444", fontSize: "13px", marginTop: "8px" }}>
@@ -279,21 +311,25 @@ export default function BookingForm({ onConfirm }) {
             </div>
           )}
 
-          {/* ========================== */}
-          {/* STEP 3 — Details */}
-          {/* ========================== */}
+          {/* ======================== */}
+          {/* STEP 3 — Details        */}
+          {/* ======================== */}
           {currentStep === 2 && (
             <div>
               <h2 style={{
-                fontSize: "22px", fontWeight: "800",
-                color: "var(--text-heading)", marginBottom: "8px",
+                fontSize: "22px",
+                fontWeight: "800",
+                color: "var(--text-heading)",
+                marginBottom: "8px",
               }}>
-                Your Details
+                {t.detailsTitle}
               </h2>
               <p style={{
-                fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px",
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+                marginBottom: "24px",
               }}>
-                Tell us where to clean and how to reach you.
+                {t.detailsDesc}
               </p>
 
               <div style={{
@@ -303,12 +339,13 @@ export default function BookingForm({ onConfirm }) {
               }}>
                 <div>
                   <label style={labelStyle}>
-                    Full Name <span style={{ color: "#ef4444" }}>*</span>
+                    {t.fullName} <span style={{ color: "#ef4444" }}>{"*"}</span>
                   </label>
                   <input
-                    type="text" value={booking.name}
+                    type="text"
+                    value={booking.name}
                     onChange={e => update("name", e.target.value)}
-                    placeholder="Your full name"
+                    placeholder={t.namePlaceholder}
                     style={{
                       ...inputStyle,
                       border: errors.name
@@ -322,14 +359,16 @@ export default function BookingForm({ onConfirm }) {
                     </div>
                   )}
                 </div>
+
                 <div>
                   <label style={labelStyle}>
-                    Email <span style={{ color: "#ef4444" }}>*</span>
+                    {t.emailAddr} <span style={{ color: "#ef4444" }}>{"*"}</span>
                   </label>
                   <input
-                    type="email" value={booking.email}
+                    type="email"
+                    value={booking.email}
                     onChange={e => update("email", e.target.value)}
-                    placeholder="your@email.com"
+                    placeholder={t.emailPlaceholder}
                     style={{
                       ...inputStyle,
                       border: errors.email
@@ -346,23 +385,25 @@ export default function BookingForm({ onConfirm }) {
               </div>
 
               <div style={{ marginTop: "16px" }}>
-                <label style={labelStyle}>Phone Number (optional)</label>
+                <label style={labelStyle}>{t.phoneOpt}</label>
                 <input
-                  type="tel" value={booking.phone}
+                  type="tel"
+                  value={booking.phone}
                   onChange={e => update("phone", e.target.value)}
-                  placeholder="+358 xx xxx xxxx"
+                  placeholder={t.phonePlaceholder}
                   style={inputStyle}
                 />
               </div>
 
               <div style={{ marginTop: "16px" }}>
                 <label style={labelStyle}>
-                  Cleaning Address <span style={{ color: "#ef4444" }}>*</span>
+                  {t.cleaningAddress} <span style={{ color: "#ef4444" }}>{"*"}</span>
                 </label>
                 <input
-                  type="text" value={booking.address}
+                  type="text"
+                  value={booking.address}
                   onChange={e => update("address", e.target.value)}
-                  placeholder="Street address, city, postcode"
+                  placeholder={t.addrPlaceholder}
                   style={{
                     ...inputStyle,
                     border: errors.address
@@ -378,11 +419,11 @@ export default function BookingForm({ onConfirm }) {
               </div>
 
               <div style={{ marginTop: "16px" }}>
-                <label style={labelStyle}>Special Instructions (optional)</label>
+                <label style={labelStyle}>{t.specialInstr}</label>
                 <textarea
                   value={booking.notes}
                   onChange={e => update("notes", e.target.value)}
-                  placeholder="Any special requests, allergies, access instructions..."
+                  placeholder={t.notesPlaceholder}
                   rows={3}
                   style={{ ...inputStyle, resize: "vertical" }}
                 />
@@ -391,20 +432,24 @@ export default function BookingForm({ onConfirm }) {
           )}
 
           {/* ======================== */}
-          {/* STEP 4 — Confirm */}
+          {/* STEP 4 — Confirm        */}
           {/* ======================== */}
           {currentStep === 3 && (
             <div>
               <h2 style={{
-                fontSize: "22px", fontWeight: "800",
-                color: "var(--text-heading)", marginBottom: "8px",
+                fontSize: "22px",
+                fontWeight: "800",
+                color: "var(--text-heading)",
+                marginBottom: "8px",
               }}>
-                Confirm Your Booking
+                {t.confirmTitle}
               </h2>
               <p style={{
-                fontSize: "14px", color: "var(--text-secondary)", marginBottom: "24px",
+                fontSize: "14px",
+                color: "var(--text-secondary)",
+                marginBottom: "24px",
               }}>
-                Please review your booking details before confirming.
+                {t.confirmDesc}
               </p>
 
               {/* ✅ Booking summary */}
@@ -416,20 +461,25 @@ export default function BookingForm({ onConfirm }) {
                 border: "1px solid var(--border-color)",
               }}>
                 {[
-                  { label: "Service",  value: selectedService?.label },
-                  { label: "Price",    value: selectedService?.price },
-                  { label: "Duration", value: selectedService?.duration },
+                  { label: t.service,  value: selectedService?.label },
+                  { label: t.price,    value: selectedService?.price },
+                  { label: t.duration, value: selectedService?.duration },
                   {
-                    label: "Date",
-                    value: booking.date?.toLocaleDateString("en-GB", {
-                      weekday: "long", day: "numeric",
-                      month: "long", year: "numeric",
-                    }),
+                    label: t.date,
+                    value: booking.date?.toLocaleDateString(
+                      language === "fi" ? "fi-FI" : "en-GB",
+                      {
+                        weekday: "long",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      }
+                    ),
                   },
-                  { label: "Time",    value: booking.time },
-                  { label: "Name",    value: booking.name },
-                  { label: "Email",   value: booking.email },
-                  { label: "Address", value: booking.address },
+                  { label: t.time,    value: booking.time },
+                  { label: t.name,    value: booking.name },
+                  { label: t.email,   value: booking.email },
+                  { label: t.address, value: booking.address },
                 ].map((item) => (
                   <div key={item.label} style={{
                     display: "flex",
@@ -463,8 +513,7 @@ export default function BookingForm({ onConfirm }) {
                 textAlign: "center",
                 lineHeight: "1.6",
               }}>
-                By confirming you agree to our terms of service.
-                You can cancel or reschedule up to 24 hours before your booking.
+                {t.termsNotice}
               </p>
             </div>
           )}
@@ -491,7 +540,7 @@ export default function BookingForm({ onConfirm }) {
                 cursor: "pointer",
               }}
             >
-              ← Back
+              {"←"} {t.back}
             </button>
           ) : (
             <div />
@@ -512,7 +561,10 @@ export default function BookingForm({ onConfirm }) {
               flex: currentStep === 0 ? 1 : "unset",
             }}
           >
-            {currentStep === 3 ? "✅ Confirm Booking" : "Continue →"}
+            {currentStep === 3
+              ? `✅ ${t.confirmBooking}`
+              : `${t.continue} →`
+            }
           </button>
         </div>
 

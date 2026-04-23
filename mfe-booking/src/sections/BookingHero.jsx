@@ -1,6 +1,9 @@
 import React from "react";
+import { useLanguage } from "../hooks/useLanguage";
 
 export default function BookingHero() {
+  const { t } = useLanguage();
+
   return (
     <section style={{
       backgroundColor: "var(--bg-primary)",
@@ -23,7 +26,7 @@ export default function BookingHero() {
           marginBottom: "20px",
         }}>
           <span>📅</span>
-          <span>Easy Online Booking</span>
+          <span>{t.bookingBadge}</span>
         </div>
 
         {/* ✅ Headline */}
@@ -34,17 +37,17 @@ export default function BookingHero() {
           lineHeight: "1.15",
           marginBottom: "16px",
         }}>
-          Book Your{" "}
-          <span style={{ color: "#14b8a6" }}>Cleaning Service</span>
+          {t.bookingTitle1}{" "}
+          <span style={{ color: "#14b8a6" }}>{t.bookingTitle2}</span>
         </h1>
 
+        {/* ✅ Subtitle */}
         <p style={{
           fontSize: "clamp(1rem, 2vw, 1.1rem)",
           color: "var(--text-secondary)",
           lineHeight: "1.7",
         }}>
-          Choose your service, pick a date and time, and we will
-          take care of the rest. Takes less than 2 minutes!
+          {t.bookingSubtitle}
         </p>
 
         {/* ✅ Steps indicator */}
@@ -55,12 +58,7 @@ export default function BookingHero() {
           gap: "8px",
           marginTop: "24px",
         }}>
-          {[
-            "1. Choose service",
-            "2. Pick date & time",
-            "3. Your details",
-            "4. Confirm",
-          ].map((step) => (
+          {[t.step1Label, t.step2Label, t.step3Label, t.step4Label].map((step) => (
             <div key={step} style={{
               backgroundColor: "var(--bg-card)",
               padding: "6px 14px",

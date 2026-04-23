@@ -53,3 +53,13 @@ CREATE TABLE IF NOT EXISTS services (
   is_active   BOOLEAN      DEFAULT TRUE,
   created_at  TIMESTAMP    DEFAULT NOW()
 );
+
+-- ✅ Admins table 
+CREATE TABLE IF NOT EXISTS admins (
+  id          SERIAL PRIMARY KEY,
+  username    VARCHAR(50)  NOT NULL UNIQUE,
+  email       VARCHAR(100) NOT NULL UNIQUE,
+  password    VARCHAR(255) NOT NULL,
+  role        VARCHAR(20)  DEFAULT 'admin',
+  created_at  TIMESTAMP    DEFAULT NOW()
+);

@@ -1,45 +1,74 @@
 const express = require("express");
 const bcrypt  = require("bcryptjs");
 const jwt     = require("jsonwebtoken");
+const pool    = require("../config/db");
 const router  = express.Router();
 
-// ✅ Admin credentials — will move to database later
-const ADMIN_USERNAME      = "admin";
-const ADMIN_PASSWORD_HASH = bcrypt.hashSync("admin123", 10);
-
-// ✅ POST /api/auth/login
+// ✅ POST /api/auth/login — check database
 router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // ✅ Check username
-    if (username !== ADMIN_USERNAME) {
-      return res.status(401).json({
+    if (!username || !password) {
+      return res.status(400).json({
         success: false,
-        message: "Invalid credentials",
+        message: "Username and password are required",
       });
     }
 
-    // ✅ Check password
-    const isMatch = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
+    // ✅ Find admin in database
+    const result = await pool.query(
+      "SELECT * FROM admins WHERE username = $1",
+      [username]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid username or password",
+      });
+    }
+
+    const admin = result.rows[0];
+
+    // ✅ Compare password with hashed password
+    const isMatch = await bcrypt.compare(password, admin.password);
+
     if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid credentials",
+        message: "Invalid username or password",
       });
     }
 
     // ✅ Generate JWT token
     const token = jwt.sign(
-      { username: ADMIN_USERNAME, role: "admin" },
+      {
+        id:       admin.id,
+        username: admin.username,
+        role:     admin.role,
+      },
       process.env.JWT_SECRET,
-      { expiresIn: "24h" }
+      { expiresIn: "7d" }
     );
 
-    res.json({ success: true, token });
+    res.json({
+      success: true,
+      token,
+      admin: {
+        id:       admin.id,
+        username: admin.username,
+        email:    admin.email,
+        role:     admin.role,
+      },
+    });
 
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
+    console.error("Login error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 

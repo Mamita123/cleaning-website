@@ -1,19 +1,11 @@
-const express   = require("express");
-const cors      = require("cors");
-const dotenv    = require("dotenv");
+const express  = require("express");
+const cors     = require("cors");
+const path     = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 
-// ✅ Load environment variables
-dotenv.config();
+const app  = express();
+const PORT = process.env.PORT || 5000;
 
-// ✅ Import database connection
-const { connectDB } = require("./config/db");
-
-// ✅ Connect to Neon PostgreSQL
-connectDB();
-
-const app = express();
-
-// ✅ CORS — allow all MFE ports
 app.use(cors({
   origin: [
     "http://localhost:3000",
@@ -29,36 +21,34 @@ app.use(cors({
   credentials: true,
 }));
 
-// ✅ Parse JSON and form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ API routes
-app.use("/api/auth",     require("./routes/auth"));
-app.use("/api/bookings", require("./routes/bookings"));
-app.use("/api/contacts", require("./routes/contacts"));
-app.use("/api/reviews",  require("./routes/reviews"));
-app.use("/api/services", require("./routes/services"));
+const authRoutes    = require("./routes/auth");
+const bookingRoutes = require("./routes/bookings");
+const contactRoutes = require("./routes/contacts");
+const reviewRoutes  = require("./routes/reviews");
+const serviceRoutes = require("./routes/services");
 
-// ✅ Health check
 app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "🧹 Cleaning Website API is running!",
-    database: "PostgreSQL (Neon)",
-    version: "1.0.0",
-  });
+  res.json({ success: true, message: "J & S Palvelut API is running!" });
 });
 
-// ✅ 404 handler
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: `Route ${req.originalUrl} not found`,
-  });
-});
+app.use("/api/auth",     authRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/contacts", contactRoutes);
+app.use("/api/reviews",  reviewRoutes);
+app.use("/api/services", serviceRoutes);
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+
+const pool = require("./config/db");
+pool.query("SELECT NOW()", (err) => {
+  if (err) {
+    console.error("❌ Database test failed:", err.message);
+  } else {
+    console.log("✅ Database query test passed!");
+  }
 });

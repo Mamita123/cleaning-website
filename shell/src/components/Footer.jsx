@@ -209,15 +209,16 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom bar */}
+       {/* Bottom bar */}
         <div style={{
-          borderTop: "1px solid rgba(255,255,255,0.1)",
-          paddingTop: "28px",
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "center",
-          gap: "16px",
+        borderTop: "1px solid rgba(255,255,255,0.1)",
+        paddingTop: "28px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",  // ✅ centers everything
+        alignItems: "center",
+        gap: "16px",
+        textAlign: "center",
         }}>
 
           <div style={{ fontSize: "13px", color: "#99f6e0" }}>
