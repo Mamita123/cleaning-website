@@ -129,7 +129,7 @@ export default function Navbar() {
 
             {isAdmin && (
               <Link
-                to="/admin"
+                to="/js-admin-2024"
                 style={{
                   padding: "8px 12px",
                   borderRadius: "8px",

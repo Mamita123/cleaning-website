@@ -73,7 +73,7 @@ export default function App() {
             <Route path="/pricing"  element={<PricingApp />} />
             <Route path="/reviews"  element={<ReviewsApp/>} />
             <Route path="/contact"  element={<ContactApp />} />
-            <Route path="/admin"    element={<AdminApp />} />
+            <Route path="/js-admin-2024"    element={<AdminApp />} />
           </Routes>
         </Suspense>
       </main>
