@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "../hooks/useLanguage";
+import API_URL from "../config";
 
 export default function BookingsTable() {
   const { t } = useLanguage();
@@ -11,7 +12,7 @@ export default function BookingsTable() {
     const fetchBookings = async () => {
       try {
         const token    = localStorage.getItem("adminToken");
-        const response = await fetch("http://localhost:5000/api/bookings", {
+        const response = await fetch(`${API_URL}/api/bookings`,  {
           headers: { "Authorization": `Bearer ${token}` },
         });
         const data = await response.json();

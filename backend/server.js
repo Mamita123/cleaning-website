@@ -40,6 +40,8 @@ app.use(cors({
     "http://localhost:3006",
     "http://localhost:3007",
     "http://localhost:3008",
+     "https://js-palvelut-shell.vercel.app",
+    /\.vercel\.app$/,
   ],
   credentials: true,
 }));

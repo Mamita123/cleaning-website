@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLanguage } from "../hooks/useLanguage";
 import Calendar  from "../components/Calendar";
 import TimeSlots from "../components/TimeSlots";
+import API_URL from "../config";
 
 export default function BookingForm({ onConfirm }) {
   const { t, language } = useLanguage();
@@ -61,7 +62,7 @@ export default function BookingForm({ onConfirm }) {
         ),
       };
 
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch(`${API_URL}/api/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

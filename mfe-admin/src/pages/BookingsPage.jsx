@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "../hooks/useLanguage";
+import API_URL from "../config";
 
 const statusColors = {
   confirmed: { bg: "#dcfce7", color: "#059669" },
@@ -43,7 +44,7 @@ export default function BookingsPage() {
     try {
       setLoading(true);
       const token    = localStorage.getItem("adminToken");
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch(`${API_URL}/api/bookings/${id}/status`,{
         headers: { "Authorization": `Bearer ${token}` },
       });
       const data = await response.json();
@@ -59,8 +60,7 @@ export default function BookingsPage() {
   const updateStatus = async (id, newStatus) => {
     try {
       const token    = localStorage.getItem("adminToken");
-      const response = await fetch(
-        `http://localhost:5000/api/bookings/${id}/status`,
+      const response = await fetch(`${API_URL}/api/bookings/${id}`, 
         {
           method: "PUT",
           headers: {
@@ -88,7 +88,7 @@ export default function BookingsPage() {
     if (!window.confirm(confirmMsg)) return;
     try {
       const token = localStorage.getItem("adminToken");
-      await fetch(`http://localhost:5000/api/bookings/${id}`, {
+      await fetch(`${API_URL}/api/bookings`, {
         method: "DELETE",
         headers: { "Authorization": `Bearer ${token}` },
       });

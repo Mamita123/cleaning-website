@@ -106,11 +106,14 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    setIsLoggedIn(false);
-    window.dispatchEvent(new Event("storage"));
-    window.location.href = "http://localhost:3000";
-  };
+  localStorage.removeItem("adminToken");
+  setIsLoggedIn(false);
+  window.dispatchEvent(new Event("storage"));
+  const isLocal = window.location.hostname === "localhost";
+  window.location.href = isLocal
+    ? "http://localhost:3000"
+    : "https://js-palvelut-shell.vercel.app";
+};
 
   if (loading) {
     return (

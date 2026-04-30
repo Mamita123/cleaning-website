@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLanguage } from "../hooks/useLanguage";
+import API_URL from "../config";
 
 export default function RegisterPage({ onBackToLogin }) {
   const { language } = useLanguage();
@@ -50,7 +51,7 @@ export default function RegisterPage({ onBackToLogin }) {
     setStatus("loading");
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
