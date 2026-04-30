@@ -1,0 +1,28 @@
+{
+  "name": "cleaning-website",
+  "version": "1.0.0",
+  "description": "J & S Palvelut Oy - Micro Frontend Web Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "start": "concurrently \"npm start --prefix shell\" \"npm start --prefix mfe-home\" \"npm start --prefix mfe-services\" \"npm start --prefix mfe-booking\" \"npm start --prefix mfe-about\" \"npm start --prefix mfe-pricing\" \"npm start --prefix mfe-reviews\" \"npm start --prefix mfe-contact\" \"npm start --prefix mfe-admin\" \"npm run dev --prefix backend\"",
+    "start:frontend": "concurrently \"npm start --prefix shell\" \"npm start --prefix mfe-home\" \"npm start --prefix mfe-services\" \"npm start --prefix mfe-booking\" \"npm start --prefix mfe-about\" \"npm start --prefix mfe-pricing\" \"npm start --prefix mfe-reviews\" \"npm start --prefix mfe-contact\" \"npm start --prefix mfe-admin\"",
+    "start:backend": "npm run dev --prefix backend",
+    "build:all": "concurrently \"npm run build --prefix shell\" \"npm run build --prefix mfe-home\" \"npm run build --prefix mfe-services\" \"npm run build --prefix mfe-booking\" \"npm run build --prefix mfe-about\" \"npm run build --prefix mfe-pricing\" \"npm run build --prefix mfe-reviews\" \"npm run build --prefix mfe-contact\" \"npm run build --prefix mfe-admin\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mamita123/cleaning-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mamita123/cleaning-website/issues"
+  },
+  "homepage": "https://github.com/Mamita123/cleaning-website#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
