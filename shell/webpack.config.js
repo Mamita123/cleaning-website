@@ -36,14 +36,14 @@ module.exports = {
       name: "shell",
       remotes: isProduction ? {
         // ✅ Production — Vercel URLs
-        mfeHome:     "mfeHome@https://js-palvelut-home.vercel.app/remoteEntry.js",
-        mfeServices: "mfeServices@https://js-palvelut-services.vercel.app/remoteEntry.js",
-        mfeBooking:  "mfeBooking@https://js-palvelut-booking.vercel.app/remoteEntry.js",
-        mfeAbout:    "mfeAbout@https://js-palvelut-about.vercel.app/remoteEntry.js",
-        mfePricing:  "mfePricing@https://js-palvelut-pricing.vercel.app/remoteEntry.js",
-        mfeReviews:  "mfeReviews@https://js-palvelut-reviews.vercel.app/remoteEntry.js",
-        mfeContact:  "mfeContact@https://js-palvelut-contact.vercel.app/remoteEntry.js",
-        mfeAdmin:    "mfeAdmin@https://js-palvelut-admin.vercel.app/remoteEntry.js",
+          mfeHome:     "mfeHome@https://js-palvelut-home.vercel.app/remoteEntry.js",
+          mfeServices: "mfeServices@https://js-palvelut-services.vercel.app/remoteEntry.js",
+          mfeBooking:  "mfeBooking@https://js-palvelut-booking.vercel.app/remoteEntry.js",
+          mfeAbout:    "mfeAbout@https://js-palvelut-about.vercel.app/remoteEntry.js",
+          mfePricing:  "mfePricing@https://js-palvelut-pricing.vercel.app/remoteEntry.js",
+          mfeReviews:  "mfeReviews@https://js-palvelut-reviews.vercel.app/remoteEntry.js",
+          mfeContact:  "mfeContact@https://js-palvelut-contact.vercel.app/remoteEntry.js",
+          mfeAdmin:    "mfeAdmin@https://js-palvelut-admin.vercel.app/remoteEntry.js",
       } : {
         // ✅ Development — localhost URLs
         mfeHome:     "mfeHome@http://localhost:3001/remoteEntry.js",
