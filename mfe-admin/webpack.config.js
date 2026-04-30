@@ -1,13 +1,13 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
+const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
-  mode: "development",
-  entry: "./src/index.js",
-
+  mode: isProduction ? "production" : "development",
   output: {
-    // ✅ Admin MFE runs on port 3008
-    publicPath: "http://localhost:3008/",
+    publicPath: isProduction
+      ? "https://js-palvelut-admin.vercel.app/"
+      : "http://localhost:3008/",
   },
 
   resolve: {
