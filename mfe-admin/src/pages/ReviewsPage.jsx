@@ -27,7 +27,7 @@ export default function ReviewsPage() {
 
         // ✅ Use admin route to get ALL reviews including unapproved
         const token    = localStorage.getItem("adminToken");
-        const response = await fetch("http://localhost:5000/api/reviews/all", {
+        const response = await fetch("https://js-palvelut-backend.onrender.com/api/reviews/all", {
           headers: { "Authorization": `Bearer ${token}` },
         });
         const data = await response.json();
@@ -46,7 +46,7 @@ export default function ReviewsPage() {
     try {
       const token    = localStorage.getItem("adminToken");
       const response = await fetch(
-        `http://localhost:5000/api/reviews/${id}/approve`,
+        `https://js-palvelut-backend.onrender.com/api/reviews/${id}/approve`,
         {
           method: "PUT",
           headers: { "Authorization": `Bearer ${token}` },
