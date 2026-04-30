@@ -6,8 +6,8 @@ module.exports = {
   mode: isProduction ? "production" : "development",
   output: {
     publicPath: isProduction
-      ? "https://js-palvelut-booking.vercel.app/"
-      : "http://localhost:3003/",
+      ? "https://js-palvelut-about.vercel.app/"
+      : "http://localhost:3004/",
   },
 
   resolve: {
