@@ -73,7 +73,7 @@ function FormField({ label, type = "text", name, value, onChange, placeholder, r
 }
 
 export default function ContactForm() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", service: "", message: "",
   });
@@ -105,7 +105,7 @@ export default function ContactForm() {
     }
     setStatus("loading");
     try {
-      const response = await fetch(`${API_URL}/api/contacts`,{
+      const response = await fetch(`${API_URL}/api/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -119,6 +119,27 @@ export default function ContactForm() {
     }
   };
 
+  const otherCards = [
+    {
+      emoji: "📧",
+      title: t.emailLabel,
+      detail: "mahmudul.shapan7@gmail.com",
+      sub: t.fastResponse,
+    },
+    {
+      emoji: "📍",
+      title: t.addressLabel,
+      detail: "Kankarepolku 5 H 451, 00770 Helsinki",
+      sub: "00770 Helsinki, Finland",
+    },
+    {
+      emoji: "🕐",
+      title: t.hoursLabel,
+      detail: t.workingHours,
+      sub: t.workingSat,
+    },
+  ];
+
   return (
     <section style={{ padding: "72px 24px", backgroundColor: "var(--bg-primary)" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -130,7 +151,7 @@ export default function ContactForm() {
           alignItems: "start",
         }}>
 
-          {/* ✅ Left — Form */}
+          {/* Left — Form */}
           <div style={{
             backgroundColor: "var(--bg-card)",
             borderRadius: "24px",
@@ -155,7 +176,7 @@ export default function ContactForm() {
               {t.formSubtitle}
             </p>
 
-            {/* ✅ Success */}
+            {/* Success */}
             {status === "success" && (
               <div style={{
                 backgroundColor: "#f0fdf9",
@@ -167,7 +188,7 @@ export default function ContactForm() {
                 alignItems: "center",
                 gap: "10px",
               }}>
-                <span style={{ fontSize: "20px" }}>✅</span>
+                <span style={{ fontSize: "20px" }}>{"✅"}</span>
                 <div>
                   <div style={{ fontWeight: "700", color: "#0f766e", fontSize: "14px" }}>
                     {t.successMsg}
@@ -179,7 +200,7 @@ export default function ContactForm() {
               </div>
             )}
 
-            {/* ✅ Error */}
+            {/* Error */}
             {status === "error" && (
               <div style={{
                 backgroundColor: "#fef2f2",
@@ -196,7 +217,7 @@ export default function ContactForm() {
 
             <form onSubmit={handleSubmit} noValidate>
 
-              {/* ✅ Name + Email row */}
+              {/* Name + Email row */}
               <div style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
@@ -228,14 +249,14 @@ export default function ContactForm() {
                 </div>
               </div>
 
-              {/* ✅ Phone */}
+              {/* Phone */}
               <FormField
                 label={t.phoneOpt} type="tel" name="phone"
                 value={formData.phone} onChange={handleChange}
                 placeholder={t.phonePlaceholder}
               />
 
-              {/* ✅ Service selector */}
+              {/* Service selector */}
               <div style={{ marginBottom: "20px" }}>
                 <label style={{
                   display: "block",
@@ -274,7 +295,7 @@ export default function ContactForm() {
                 </select>
               </div>
 
-              {/* ✅ Message */}
+              {/* Message */}
               <FormField
                 label={t.yourMessage} name="message"
                 value={formData.message} onChange={handleChange}
@@ -286,7 +307,7 @@ export default function ContactForm() {
                 </div>
               )}
 
-              {/* ✅ Submit button */}
+              {/* Submit button */}
               <button
                 type="submit"
                 disabled={status === "loading"}
@@ -311,7 +332,7 @@ export default function ContactForm() {
             </form>
           </div>
 
-          {/* ✅ Right — Contact Info */}
+          {/* Right — Contact Info */}
           <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
             <h2 style={{
               fontSize: "24px",
@@ -321,33 +342,81 @@ export default function ContactForm() {
               {t.otherWays}
             </h2>
 
-            {/* ✅ Contact cards */}
-            {[
-              {
-                emoji: "📞",
-                title: t.phone,
-                detail: "045 181 2636",
-                sub: t.workingHours,
-              },
-              {
-                emoji: "📧",
-                title: t.emailLabel,
-                detail: "mahmudul.shapan7@gmail.com",
-                sub: t.fastResponse,
-              },
-              {
-                emoji: "📍",
-                title: t.addressLabel,
-                detail: "Kankarepolku 5 H 451, 00770 Helsinki",
-                sub: "00770 Helsinki, Finland",
-              },
-              {
-                emoji: "🕐",
-                title: t.hoursLabel,
-                detail: t.workingHours,
-                sub: t.workingSat,
-              },
-            ].map((item) => (
+            {/* Phone card — special with two bold numbers */}
+            <div style={{
+              backgroundColor: "var(--bg-card)",
+              borderRadius: "16px",
+              padding: "20px 24px",
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "16px",
+              border: "1px solid var(--border-color)",
+            }}>
+              <span style={{ fontSize: "1.75rem", flexShrink: 0 }}>{"📞"}</span>
+              <div>
+                <div style={{
+                  fontSize: "13px",
+                  fontWeight: "700",
+                  color: "var(--text-secondary)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  marginBottom: "8px",
+                }}>
+                  {t.phone}
+                </div>
+
+                {/* Shapan number */}
+                <div style={{
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  color: "var(--text-primary)",
+                  marginBottom: "4px",
+                }}>
+                  045 181 2636
+                  <span style={{
+                    fontSize: "13px",
+                    fontWeight: "500",
+                    color: "var(--text-secondary)",
+                    marginLeft: "6px",
+                  }}>
+                    (Shapan)
+                  </span>
+                </div>
+
+                {/* Jamanta number */}
+                <div style={{
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  color: "var(--text-primary)",
+                  marginBottom: "8px",
+                }}>
+                  040 593 3052
+                  <span style={{
+                    fontSize: "13px",
+                    fontWeight: "500",
+                    color: "var(--text-secondary)",
+                    marginLeft: "6px",
+                  }}>
+                    (Jamanta)
+                  </span>
+                </div>
+
+                {/* Open every day */}
+                <div style={{
+                  fontSize: "13px",
+                  color: "#14b8a6",
+                  fontWeight: "600",
+                }}>
+                  {"🟢"} {language === "fi"
+                    ? "Auki joka paiva palveluille"
+                    : "Open every day for services"
+                  }
+                </div>
+              </div>
+            </div>
+
+            {/* Other contact cards */}
+            {otherCards.map((item) => (
               <div key={item.title} style={{
                 backgroundColor: "var(--bg-card)",
                 borderRadius: "16px",
@@ -389,14 +458,14 @@ export default function ContactForm() {
               </div>
             ))}
 
-            {/* ✅ Fast response badge */}
+            {/* Fast response badge */}
             <div style={{
               backgroundColor: "#14b8a6",
               borderRadius: "16px",
               padding: "20px 24px",
               textAlign: "center",
             }}>
-              <div style={{ fontSize: "2rem", marginBottom: "8px" }}>⚡</div>
+              <div style={{ fontSize: "2rem", marginBottom: "8px" }}>{"⚡"}</div>
               <div style={{
                 fontWeight: "700",
                 color: "white",

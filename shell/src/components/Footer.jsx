@@ -63,7 +63,8 @@ export default function Footer() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
               {[
-                { icon: "📞", text: "045 181 2636" },
+                { icon: "📞", text: "045 181 2636 (Shapan)" },
+                { icon: "📞", text: "040 593 3052 (Jamanta)" },
                 { icon: "📧", text: "mahmudul.shapan7@gmail.com" },
                 { icon: "📍", text: "Kankarepolku 5 H 451, 00770 Helsinki" },
               ].map((item) => (
