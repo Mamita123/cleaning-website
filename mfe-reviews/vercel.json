@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/remoteEntry.js",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
