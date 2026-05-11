@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function PricingCards() {
-  const [isYearly, setIsYearly] = useState(false);
-  const { t } = useLanguage();
+  const { language } = useLanguage();
 
-  // ✅ Dark mode observer
   const [isDark, setIsDark] = useState(
     document.documentElement.getAttribute("data-theme") === "dark"
   );
+
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setIsDark(
@@ -22,43 +21,84 @@ export default function PricingCards() {
     return () => observer.disconnect();
   }, []);
 
-  // ✅ Plans — all text from translations
-  const plans = [
+  const services = [
     {
-      id:           "basic",
-      name:         t.planBasic,
-      emoji:        "🌱",
-      monthlyPrice: "€49",
-      yearlyPrice:  "€39",
-      description:  t.planBasicDesc,
-      features:     [t.basicF1, t.basicF2, t.basicF3, t.basicF4, t.basicF5, t.basicF6],
-      notIncluded:  [t.basicN1, t.basicN2, t.basicN3],
-      cta:          t.planBasicCta,
-      popular:      false,
+      id:          "home",
+      emoji:       "🏠",
+      name:        language === "fi" ? "Kotisiivous" : "Home Cleaning",
+      description: language === "fi"
+        ? "Ammattimainen kodin siivous räätälöitynä tarpeisiisi."
+        : "Professional home cleaning tailored to your needs.",
+      price:       35,
+      features:    language === "fi"
+        ? ["Pölynimurointi ja pyyhintä", "Keittiön puhdistus", "Kylpyhuoneen puhdistus", "Lattioiden pesu", "Roskien tyhjennys"]
+        : ["Vacuuming and dusting", "Kitchen cleaning", "Bathroom cleaning", "Floor washing", "Trash removal"],
+      popular: false,
     },
     {
-      id:           "standard",
-      name:         t.planStandard,
-      emoji:        "⭐",
-      monthlyPrice: "€79",
-      yearlyPrice:  "€63",
-      description:  t.planStandardDesc,
-      features:     [t.stdF1, t.stdF2, t.stdF3, t.stdF4, t.stdF5, t.stdF6],
-      notIncluded:  [t.stdN1, t.stdN2],
-      cta:          t.planStandardCta,
-      popular:      true,
+      id:          "deep",
+      emoji:       "✨",
+      name:        language === "fi" ? "Syväsiivous" : "Deep Cleaning",
+      description: language === "fi"
+        ? "Perusteellinen siivous joka nurkkaan ja sopukkaan."
+        : "Thorough cleaning reaching every corner and surface.",
+      price:       45,
+      features:    language === "fi"
+        ? ["Kaikki kotisiivouspalvelut", "Ikkunoiden puhdistus", "Kaappien sisäpuolien puhdistus", "Kodinkoneiden puhdistus", "Syvä lattioiden pesu", "Desinfiointi"]
+        : ["All home cleaning services", "Window cleaning", "Inside cabinet cleaning", "Appliance cleaning", "Deep floor washing", "Disinfection"],
+      popular: true,
     },
     {
-      id:           "premium",
-      name:         t.planPremium,
-      emoji:        "👑",
-      monthlyPrice: "€129",
-      yearlyPrice:  "€103",
-      description:  t.planPremiumDesc,
-      features:     [t.premF1, t.premF2, t.premF3, t.premF4, t.premF5, t.premF6],
-      notIncluded:  [],
-      cta:          t.planPremiumCta,
-      popular:      false,
+      id:          "office",
+      emoji:       "🏢",
+      name:        language === "fi" ? "Toimistosiivous" : "Office Cleaning",
+      description: language === "fi"
+        ? "Pidä toimistosi siistinä ja tuottavana."
+        : "Keep your office clean and productive.",
+      price:       38,
+      features:    language === "fi"
+        ? ["Työpöytien puhdistus", "Lattioiden imurointi ja pesu", "Keittiö ja taukotila", "WC-tilojen puhdistus", "Roskien tyhjennys", "Ikkunapintojen pyyhintä"]
+        : ["Desk and surface cleaning", "Floor vacuuming and washing", "Kitchen and break room", "Toilet cleaning", "Trash removal", "Window surface wiping"],
+      popular: false,
+    },
+    {
+      id:          "moveinout",
+      emoji:       "📦",
+      name:        language === "fi" ? "Muuttosiivous" : "Move In / Move Out",
+      description: language === "fi"
+        ? "Täydellinen siivous muuton yhteydessä."
+        : "Complete cleaning for moving in or out.",
+      price:       45,
+      features:    language === "fi"
+        ? ["Koko asunnon syväsiivous", "Kaappien sisäpuolien pesu", "Kodinkoneiden puhdistus", "Ikkunoiden pesu", "Lattioiden kiillotus", "Desinfiointi"]
+        : ["Full apartment deep clean", "Inside cabinet washing", "Appliance deep cleaning", "Window washing", "Floor polishing", "Disinfection"],
+      popular: false,
+    },
+    {
+      id:          "window",
+      emoji:       "🪟",
+      name:        language === "fi" ? "Ikkunanpesu" : "Window Cleaning",
+      description: language === "fi"
+        ? "Kirkkaat ikkunat sisältä ja ulkoa."
+        : "Crystal clear windows inside and outside.",
+      price:       35,
+      features:    language === "fi"
+        ? ["Ikkunoiden pesu sisältä", "Ikkunoiden pesu ulkoa", "Ikkunapuiteiden pyyhintä", "Ikkunalaudojen puhdistus", "Tahrojen poisto"]
+        : ["Inside window washing", "Outside window washing", "Window frame wiping", "Window sill cleaning", "Stain removal"],
+      popular: false,
+    },
+    {
+      id:          "restaurant",
+      emoji:       "🍽️",
+      name:        language === "fi" ? "Ravintola ja baari" : "Restaurant & Bar",
+      description: language === "fi"
+        ? "Ammattimainen siivous ravintoloille ja baareille."
+        : "Professional cleaning for restaurants and bars.",
+      price:       40,
+      features:    language === "fi"
+        ? ["Keittiön syväpuhdistus", "Lattioiden pesu ja desinfiointi", "Pöytien ja tuolien puhdistus", "Baaritiskin puhdistus", "WC-tilojen desinfiointi", "Roskien tyhjennys"]
+        : ["Kitchen deep cleaning", "Floor washing and disinfection", "Table and chair cleaning", "Bar counter cleaning", "Toilet disinfection", "Trash removal"],
+      popular: false,
     },
   ];
 
@@ -67,99 +107,76 @@ export default function PricingCards() {
       padding: "72px 24px",
       backgroundColor: "var(--bg-primary)",
     }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
 
-        {/* ✅ Billing toggle */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "16px",
-          marginBottom: "56px",
-        }}>
-          <span style={{
-            fontSize: "15px",
-            fontWeight: "600",
-            color: !isYearly ? "#0d9488" : "var(--text-secondary)",
+        {/* Header */}
+        <div style={{ textAlign: "center", marginBottom: "56px" }}>
+          <h2 style={{
+            fontSize: "36px",
+            fontWeight: "800",
+            color: "var(--text-primary)",
+            marginBottom: "16px",
           }}>
-            {t.monthly}
-          </span>
-
-          <button
-            onClick={() => setIsYearly(!isYearly)}
-            style={{
-              width: "52px",
-              height: "28px",
-              borderRadius: "999px",
-              border: "none",
-              cursor: "pointer",
-              backgroundColor: isYearly ? "#14b8a6" : "var(--border-color)",
-              position: "relative",
-              transition: "background 0.2s",
-              padding: 0,
-            }}
-          >
-            <span style={{
-              position: "absolute",
-              top: "3px",
-              left: isYearly ? "27px" : "3px",
-              width: "22px",
-              height: "22px",
-              borderRadius: "50%",
-              backgroundColor: "white",
-              transition: "left 0.2s",
-              boxShadow: "0 1px 4px rgba(0,0,0,0.2)",
-            }} />
-          </button>
-
-          <span style={{
-            fontSize: "15px",
-            fontWeight: "600",
-            color: isYearly ? "#0d9488" : "var(--text-secondary)",
+            {language === "fi" ? "Palvelumme ja hinnat" : "Our Services and Pricing"}
+          </h2>
+          <p style={{
+            fontSize: "16px",
+            color: "var(--text-secondary)",
+            maxWidth: "600px",
+            margin: "0 auto 16px",
           }}>
-            {t.yearly}
-            <span style={{
-              marginLeft: "8px",
-              backgroundColor: "#ccfbef",
-              color: "#0f766e",
-              fontSize: "11px",
-              fontWeight: "700",
-              padding: "2px 8px",
-              borderRadius: "999px",
-            }}>
-              {t.save20}
-            </span>
-          </span>
+            {language === "fi"
+              ? "Kaikki hinnat ovat tuntihintoja ilman ALV:ta (25,5%). Minimi varaus 2 tuntia."
+              : "All prices are per hour excluding VAT (25.5%). Minimum booking 2 hours."
+            }
+          </p>
+          <div style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            backgroundColor: "#fef3c7",
+            padding: "10px 20px",
+            borderRadius: "999px",
+            fontSize: "13px",
+            fontWeight: "600",
+            color: "#92400e",
+            border: "1px solid #fde68a",
+          }}>
+            {"⚠️"} {language === "fi"
+              ? "Hinnat ilman ALV 25,5%"
+              : "Prices exclude VAT 25.5%"
+            }
+          </div>
         </div>
 
-        {/* ✅ Cards grid */}
+        {/* Cards grid */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "24px",
           alignItems: "start",
         }}>
-          {plans.map((plan) => (
+          {services.map((service) => (
             <div
-              key={plan.id}
+              key={service.id}
               style={{
-                backgroundColor: plan.popular
+                backgroundColor: service.popular
                   ? isDark ? "#134e4a" : "#0d9488"
                   : "var(--bg-card)",
                 borderRadius: "24px",
-                border: plan.popular
+                border: service.popular
                   ? "2px solid #14b8a6"
                   : "2px solid var(--border-color)",
                 padding: "36px 28px",
                 position: "relative",
-                transform: plan.popular ? "scale(1.05)" : "scale(1)",
-                boxShadow: plan.popular
+                transform: service.popular ? "scale(1.03)" : "scale(1)",
+                boxShadow: service.popular
                   ? "0 20px 60px rgba(13,148,136,0.25)"
                   : "0 2px 12px rgba(0,0,0,0.06)",
               }}
             >
-              {/* ✅ Popular badge */}
-              {plan.popular && (
+              {/* Popular badge */}
+              {service.popular && (
                 <div style={{
                   position: "absolute",
                   top: "-14px",
@@ -173,77 +190,91 @@ export default function PricingCards() {
                   borderRadius: "999px",
                   whiteSpace: "nowrap",
                 }}>
-                  {/* ✅ Star emoji + translated text */}
-                  {"⭐"} {t.mostPopular}
+                  {"⭐"} {language === "fi" ? "Suosituin" : "Most Popular"}
                 </div>
               )}
 
-              {/* ✅ Emoji */}
-              <span style={{ fontSize: "2rem" }}>{plan.emoji}</span>
+              {/* Emoji */}
+              <span style={{ fontSize: "2rem" }}>{service.emoji}</span>
 
-              {/* ✅ Plan name — from translations */}
+              {/* Service name */}
               <h3 style={{
                 fontSize: "22px",
                 fontWeight: "800",
-                color: plan.popular
+                color: service.popular
                   ? isDark ? "#5eead4" : "white"
                   : "var(--text-primary)",
                 margin: "8px 0 4px",
               }}>
-                {plan.name}
+                {service.name}
               </h3>
 
-              {/* ✅ Description */}
+              {/* Description */}
               <p style={{
                 fontSize: "14px",
-                color: plan.popular
+                color: service.popular
                   ? isDark ? "#99f6e0" : "#ccfbef"
                   : "var(--text-secondary)",
                 lineHeight: "1.5",
                 marginBottom: "16px",
               }}>
-                {plan.description}
+                {service.description}
               </p>
 
-              {/* ✅ Price */}
-              <div style={{ marginBottom: "28px" }}>
+              {/* Price */}
+              <div style={{ marginBottom: "8px" }}>
                 <span style={{
                   fontSize: "48px",
                   fontWeight: "800",
-                  color: plan.popular
+                  color: service.popular
                     ? isDark ? "#5eead4" : "white"
                     : "#0d9488",
                   lineHeight: "1",
                 }}>
-                  {isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                  {service.price}€
                 </span>
                 <span style={{
                   fontSize: "16px",
-                  color: plan.popular
+                  color: service.popular
                     ? isDark ? "#99f6e0" : "#ccfbef"
                     : "var(--text-secondary)",
                   marginLeft: "4px",
                 }}>
-                  {t.perMonth}
+                  {language === "fi" ? "/tunti" : "/hour"}
                 </span>
               </div>
 
-              {/* ✅ Features */}
-              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px" }}>
-                {plan.features.map((feature, i) => (
+              {/* VAT note */}
+              <p style={{
+                fontSize: "12px",
+                color: service.popular
+                  ? isDark ? "#99f6e0" : "#ccfbef"
+                  : "var(--text-secondary)",
+                marginBottom: "20px",
+              }}>
+                {language === "fi" ? "ALV 25,5% ei sisälly" : "VAT 25.5% not included"}
+              </p>
+
+              {/* Features */}
+              <ul style={{
+                listStyle: "none",
+                padding: 0,
+                margin: "0 0 28px",
+              }}>
+                {service.features.map((feature, i) => (
                   <li key={i} style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "10px",
                     fontSize: "14px",
-                    color: plan.popular
+                    color: service.popular
                       ? isDark ? "#99f6e0" : "#ccfbef"
                       : "var(--text-primary)",
                     marginBottom: "10px",
                     fontWeight: "500",
                   }}>
                     <span style={{
-                      color: plan.popular ? "#5eead4" : "#14b8a6",
+                      color: service.popular ? "#5eead4" : "#14b8a6",
                       fontWeight: "800",
                       fontSize: "16px",
                     }}>
@@ -252,90 +283,56 @@ export default function PricingCards() {
                     {feature}
                   </li>
                 ))}
-
-                {/* ✅ Not included */}
-                {plan.notIncluded.map((feature, i) => (
-                  <li key={i} style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    fontSize: "14px",
-                    color: plan.popular
-                      ? isDark ? "#99f6e0" : "#ccfbef"
-                      : "var(--text-secondary)",
-                    marginBottom: "10px",
-                    textDecoration: "line-through",
-                    opacity: 0.6,
-                  }}>
-                    <span style={{ fontWeight: "800" }}>{"✗"}</span>
-                    {feature}
-                  </li>
-                ))}
               </ul>
 
-              {/* ✅ CTA button */}
+              {/* Book button */}
               <a href="/booking" style={{
                 display: "block",
                 textAlign: "center",
-                backgroundColor: plan.popular ? "white" : "#14b8a6",
-                color: plan.popular ? "#0d9488" : "white",
+                backgroundColor: service.popular ? "white" : "#14b8a6",
+                color: service.popular ? "#0d9488" : "white",
                 fontSize: "15px",
                 fontWeight: "700",
                 padding: "14px 24px",
                 borderRadius: "12px",
                 textDecoration: "none",
               }}>
-                {plan.cta}
+                {language === "fi" ? "Varaa nyt" : "Book Now"}
               </a>
 
             </div>
           ))}
         </div>
 
-        {/* ✅ Bottom note */}
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
+        {/* Bottom note */}
+        <div style={{
+          textAlign: "center",
+          marginTop: "48px",
+          padding: "24px",
+          backgroundColor: "var(--bg-card)",
+          borderRadius: "16px",
+          border: "1px solid var(--border-color)",
+        }}>
+          <p style={{
+            fontSize: "15px",
+            color: "var(--text-secondary)",
+            margin: "0 0 8px",
+          }}>
+            {"📞"} {language === "fi"
+              ? "Tarvitsetko räätälöidyn tarjouksen? Ota yhteyttä!"
+              : "Need a custom quote? Contact us!"
+            }
+          </p>
           <p style={{
             fontSize: "14px",
             color: "var(--text-secondary)",
-            marginBottom: "16px",
+            margin: 0,
           }}>
-            {t.allPlansInclude}
+            {language === "fi"
+              ? "Minimi varaus 2 tuntia | Hinnat ilman ALV 25,5%"
+              : "Minimum booking 2 hours | Prices exclude VAT 25.5%"
+            }
           </p>
-          <div style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "12px",
-            justifyContent: "center",
-          }}>
-            <div style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              backgroundColor: "var(--bg-card)",
-              padding: "10px 20px",
-              borderRadius: "999px",
-              fontSize: "13px",
-              fontWeight: "600",
-              color: "var(--text-secondary)",
-              border: "1px solid var(--border-color)",
-            }}>
-              {"🧾"} {t.vatNotice}
-            </div>
-            <div style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              backgroundColor: "#f0fdf9",
-              padding: "10px 20px",
-              borderRadius: "999px",
-              fontSize: "13px",
-              fontWeight: "600",
-              color: "#0f766e",
-              border: "1.5px solid #99f6e0",
-            }}>
-              {"💡"} {t.kotivah}
-            </div>
-          </div>
         </div>
 
       </div>
