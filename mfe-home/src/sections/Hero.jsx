@@ -36,7 +36,7 @@ export default function Hero() {
             fontWeight: "600",
             marginBottom: "24px",
           }}>
-            <span>✨</span>
+           
             <span>{t.heroBadge}</span>
           </div>
 

@@ -63,7 +63,7 @@ const translations = {
     servicesTitle1: "Cleaning Services",
     servicesTitle2: "For Every Need",
     servicesDesc:   "From regular home cleaning to deep cleans, office services, and move-in/move-out — we have a professional solution for every situation.",
-    serviceTypes:   "8 Service Types",
+    serviceTypes:   "7 Service Types",
     allServices:    "All Services",
     homeFilter:     "Home",
     officeFilter:   "Office",
@@ -182,6 +182,17 @@ const translations = {
     workingHours:   "Mon-Fri: 8am-6pm",
     workingSat:     "Sat: 9am-3pm  |  Sun: Closed",
 
+    // SERVICE DETAIL
+serviceDetailBack:     "All Services",
+serviceDetailAbout:    "About this service",
+serviceDetailIncludes: "What is included",
+serviceDetailMin:      "Minimum booking 2 hours per visit",
+serviceDetailBook:     "Book This Service",
+serviceDetailPrice:    "Starting + VAT 25.5%",
+serviceDetailDuration: "Estimated duration",
+storeCleaning: "Store Cleaning",
+
+
     // ===== BOOKING PAGE =====
     bookingBadge:   "Easy Online Booking",
     bookingTitle1:  "Book Your",
@@ -229,6 +240,8 @@ const translations = {
     address:        "Address",
     selectTime2:    "Select a Time",
   },
+
+  
 
   fi: {
     // ===== NAVBAR =====
@@ -409,6 +422,16 @@ const translations = {
     areaDesc:       "Etkos sure kattaako alueesi? Laheta meille viesti ja kerromme!",
     workingHours:   "Ma-Pe: 8-18",
     workingSat:     "La: 9-15  |  Su: Suljettu",
+
+    // SERVICE DETAIL
+serviceDetailBack:     "Kaikki palvelut",
+serviceDetailAbout:    "Tietoa palvelusta",
+serviceDetailIncludes: "Mita sisaltyy",
+serviceDetailMin:      "Minimi varaus 2 tuntia per kaynti",
+serviceDetailBook:     "Varaa tama palvelu",
+serviceDetailPrice:    "Alkaen + ALV 25.5%",
+serviceDetailDuration: "Arvioitu kesto",
+storeCleaning:         "Myymalasiivous",
 
     // ===== BOOKING PAGE =====
     bookingBadge:   "Helppo verkkovaraus",

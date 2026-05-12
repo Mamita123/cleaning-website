@@ -25,7 +25,7 @@ export default function ServicesHero() {
           fontWeight: "600",
           marginBottom: "24px",
         }}>
-          <span>🧹</span>
+        
           <span>{t.servicesBadge}</span>
         </div>
 
@@ -60,7 +60,6 @@ export default function ServicesHero() {
           {[
             { icon: "🏠", text: t.serviceTypes },
             { icon: "⭐", text: "4.9 " + t.avgRating },
-            { icon: "👥", text: "2,000+ " + t.happyCustomers },
             { icon: "🌿", text: t.ecoFriendly },
           ].map((item) => (
             <div key={item.text} style={{

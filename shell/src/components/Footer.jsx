@@ -15,7 +15,7 @@ export default function Footer() {
         {/* Top section — 4 columns */}
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
           gap: "40px",
           marginBottom: "48px",
         }}>
@@ -122,7 +122,46 @@ export default function Footer() {
             </div>
           </div>
 
-          
+          {/* Column 3 — Services */}
+          <div>
+            <h3 style={{
+              fontSize: "16px",
+              fontWeight: "700",
+              color: "white",
+              marginBottom: "20px",
+            }}>
+              {t.services}
+            </h3>
+            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              {[
+                { label: t.homeClean,      href: "/services/home-cleaning" },
+                { label: t.deepClean,      href: "/services/deep-cleaning" },
+                { label: t.officeClean,    href: "/services/office-cleaning" },
+                { label: t.moveInOut,      href: "/services/move-in-out" },
+                { label: t.windowCleaning, href: "/services/window-cleaning" },
+                { label: t.storeCleaning,  href: "/services/store-cleaning" },
+              ].map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    fontSize: "14px",
+                    color: "#99f6e0",
+                    textDecoration: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.color = "white"}
+                  onMouseLeave={e => e.currentTarget.style.color = "#99f6e0"}
+                >
+                  <span>{">"}</span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
           {/* Column 4 — Working hours */}
           <div>
             <h3 style={{
@@ -134,60 +173,57 @@ export default function Footer() {
               {t.workingHours}
             </h3>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "24px" }}>
-              {[
-                { day: t.monday,   hours: "8:00 - 18:00" },
-                { day: t.saturday, hours: "9:00 - 15:00" },
-                { day: t.sunday,   hours: t.closed },
-              ].map((item) => (
-                <div key={item.day} style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "13px",
-                  padding: "6px 0",
-                  borderBottom: "1px solid rgba(255,255,255,0.1)",
-                }}>
-                  <span style={{ color: "#99f6e0" }}>{item.day}</span>
-                  <span style={{ color: "white", fontWeight: "600" }}>{item.hours}</span>
-                </div>
-              ))}
+            <div style={{
+              display: "flex",
+              justifyContent: "space-between",
+              fontSize: "13px",
+              padding: "6px 0",
+              borderBottom: "1px solid rgba(255,255,255,0.1)",
+              marginBottom: "16px",
+            }}>
+              <span style={{ color: "#99f6e0" }}>Mon - Sun</span>
+              <span style={{
+                color: "#14b8a6",
+                fontWeight: "900",
+                fontSize: "16px",
+              }}>
+                24/7
+              </span>
             </div>
 
-            <a href="/booking" style={{
-              display: "block",
-              textAlign: "center",
-              backgroundColor: "#14b8a6",
-              color: "white",
-              fontSize: "14px",
-              fontWeight: "700",
-              padding: "12px 20px",
-              borderRadius: "10px",
-              textDecoration: "none",
-              boxShadow: "0 4px 12px rgba(20,184,166,0.3)",
+            {/* Open badge */}
+            <div style={{
+              backgroundColor: "rgba(20,184,166,0.2)",
+              border: "1px solid rgba(20,184,166,0.4)",
+              borderRadius: "8px",
+              padding: "10px 14px",
+              fontSize: "13px",
+              color: "#5eead4",
+              fontWeight: "600",
+              marginBottom: "20px",
             }}>
-              📅 {t.bookNow}
-            </a>
+              {"🟢"} {t.openEveryday}
+            </div>
           </div>
 
         </div>
 
-       {/* Bottom bar */}
+        {/* Bottom bar */}
         <div style={{
-        borderTop: "1px solid rgba(255,255,255,0.1)",
-        paddingTop: "28px",
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",  // ✅ centers everything
-        alignItems: "center",
-        gap: "16px",
-        textAlign: "center",
+          borderTop: "1px solid rgba(255,255,255,0.1)",
+          paddingTop: "28px",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "16px",
+          textAlign: "center",
         }}>
-
           <div style={{ fontSize: "13px", color: "#99f6e0" }}>
-            {"©"} {new Date().getFullYear()} J &amp; S Palvelut Oy  {t.allRightsReserved}
+            {"©"} {new Date().getFullYear()} J &amp; S Palvelut Oy {t.allRightsReserved}
           </div>
-
         </div>
+
       </div>
     </footer>
   );

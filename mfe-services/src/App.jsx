@@ -12,7 +12,7 @@ export default function App() {
     <main>
       <ServicesHero />    {/* Top banner */}
       <ServicesList />    {/* Filterable service cards */}
-      <ServiceProcess />  {/* How it works steps */}
+       {/* How it works steps: <ServiceProcess />  */}
     </main>
   );
 }

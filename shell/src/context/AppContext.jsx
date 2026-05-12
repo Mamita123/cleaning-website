@@ -21,6 +21,7 @@ export const translations = {
     moveInOut:       "Move In / Move Out",
     ecoFriendly:     "Eco-Friendly Cleaning",
     windowCleaning:  "Window Cleaning",
+    storeCleaning: "Store cleaning",
 
     // ===== FOOTER =====
     heroSubtitle:  "J & S Palvelut delivers professional, eco-friendly cleaning services for homes and offices in Helsinki. Founded in 2023, trusted by customers across the city.",
@@ -229,15 +230,13 @@ export const translations = {
     moveInOut:       "Muuttosaately",
     ecoFriendly:     "Ymparistoystavallinen",
     windowCleaning:  "Ikkunanpesu",
+    storeCleaning: "Myymalasiivous",
 
     // ===== FOOTER =====
     heroSubtitle:  "J & S Palvelut tarjoaa ammattimaisia siivouspalveluja koteihin ja toimistoihin Helsingissa. Perustettu 2023.",
     quickLinks:    "Pikavalikko",
     workingHours:  "Aukioloajat",
-    monday:        "Maanantai - Perjantai",
-    saturday:      "Lauantai",
-    sunday:        "Sunnuntai",
-    closed:        "Suljettu",
+   openEveryday: "Open everyday for services",
     kotivahFooter: "Kotitalousvahennys saatavilla",
     founded:       "Perustettu",
 
@@ -400,8 +399,7 @@ export const translations = {
     findDesc:        "Sijaitsemme Helsingissa ja palvelemme asiakkaita ympari kaupunkia.",
     areasServed:     "Palvelualueet",
     areaDesc:        "Etkos sure kattaako alueesi? Laheta meille viesti!",
-    workingHoursC:   "Ma-Pe: 8-18",
-    workingSat:      "La: 9-15  |  Su: Suljettu",
+   openEveryday: "Auki joka paiva palveluille",
 
     // ===== BOOKING PAGE =====
     bookingBadge:    "Helppo verkkovaraus",
