@@ -122,46 +122,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 3 — Services */}
-          <div>
-            <h3 style={{
-              fontSize: "16px",
-              fontWeight: "700",
-              color: "white",
-              marginBottom: "20px",
-            }}>
-              {t.services}
-            </h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {[
-                t.homeClean,
-                t.deepClean,
-                t.officeClean,
-                t.moveInOut,
-                t.ecoFriendly,
-                t.windowCleaning,
-              ].map((service) => (
-                <a
-                  key={service}
-                  href="/services"
-                  style={{
-                    fontSize: "14px",
-                    color: "#99f6e0",
-                    textDecoration: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "6px",
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.color = "white"}
-                  onMouseLeave={e => e.currentTarget.style.color = "#99f6e0"}
-                >
-                  <span>{">"}</span>
-                  <span>{service}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
+          
           {/* Column 4 — Working hours */}
           <div>
             <h3 style={{
@@ -223,26 +184,7 @@ export default function Footer() {
         }}>
 
           <div style={{ fontSize: "13px", color: "#99f6e0" }}>
-            {"©"} {new Date().getFullYear()} J &amp; S Palvelut Oy · Y-tunnus: 3354757-1 · {t.allRightsReserved}
-          </div>
-
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            backgroundColor: "rgba(20,184,166,0.15)",
-            padding: "6px 16px",
-            borderRadius: "999px",
-            fontSize: "12px",
-            color: "#5eead4",
-            fontWeight: "600",
-            border: "1px solid rgba(20,184,166,0.3)",
-          }}>
-            💡 {t.kotivahFooter}
-          </div>
-
-          <div style={{ fontSize: "12px", color: "#5eead4" }}>
-            {t.founded} 28.3.2023 · Helsinki, Finland
+            {"©"} {new Date().getFullYear()} J &amp; S Palvelut Oy  {t.allRightsReserved}
           </div>
 
         </div>

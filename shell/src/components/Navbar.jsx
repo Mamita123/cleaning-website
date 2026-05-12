@@ -180,24 +180,24 @@ export default function Navbar() {
               {language === "en" ? "🇫🇮 FI" : "🇬🇧 EN"}
             </button>
 
-            {/* Dark mode toggle */}
-            <button
-              onClick={toggleDarkMode}
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "8px",
-                border: `1.5px solid ${borderColor}`,
-                cursor: "pointer",
-                backgroundColor: "transparent",
-                fontSize: "18px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {darkMode ? "☀️" : "🌙"}
-            </button>
+       <button
+  onClick={toggleDarkMode}
+  style={{
+    padding: "6px 12px",
+    borderRadius: "8px",
+    border: `1.5px solid ${borderColor}`,
+    cursor: "pointer",
+    backgroundColor: "transparent",
+    fontSize: "13px",
+    fontWeight: "700",
+    color: activeColor,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }}
+>
+  {darkMode ? "Light" : "Dark"}
+</button>
 
             {/* Book Now */}
             <Link
@@ -286,25 +286,24 @@ export default function Navbar() {
         </button>
 
         {/* Dark mode toggle mobile */}
-        <button
-          onClick={() => { toggleDarkMode(); setMenuOpen(false); }}
-          style={{
-            display: "block",
-            width: "100%",
-            padding: "12px 16px",
-            borderRadius: "8px",
-            fontSize: "15px",
-            fontWeight: "600",
-            border: `1px solid ${borderColor}`,
-            cursor: "pointer",
-            marginBottom: "8px",
-            textAlign: "left",
-            backgroundColor: "transparent",
-            color: linkColor,
-          }}
-        >
-          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-        </button>
+       <button
+  onClick={toggleDarkMode}
+  style={{
+    padding: "6px 10px",
+    borderRadius: "8px",
+    border: `1.5px solid ${borderColor}`,
+    cursor: "pointer",
+    backgroundColor: "transparent",
+    fontSize: "12px",
+    fontWeight: "700",
+    color: activeColor,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }}
+>
+  {darkMode ? " Light" : " Dark"}
+</button>
 
         {/* Admin + Logout mobile */}
         {isAdmin && (
