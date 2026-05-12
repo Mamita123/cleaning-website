@@ -29,6 +29,15 @@
 
 .nav-mobile-menu.open {
   display: block;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  z-index: 9998;
+  padding: 16px;
 }
 
 /* ✅ Mobile only — hide desktop nav, show hamburger */
