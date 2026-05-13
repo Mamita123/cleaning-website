@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { AppProvider } from "./context/AppContext";
+import Popup from "./components/Popup";
 
 // ✅ Error boundary class
 class ErrorBoundary extends React.Component {
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="*" element={
               <>
                 <Navbar />
+                <Popup />
                 <ErrorBoundary>
                   <Routes>
                     <Route path="/"                    element={<HomeApp />} />

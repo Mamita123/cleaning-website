@@ -25,7 +25,7 @@ export default function BookingHero() {
           fontWeight: "600",
           marginBottom: "20px",
         }}>
-          <span>📅</span>
+         
           <span>{t.bookingBadge}</span>
         </div>
 
@@ -49,30 +49,6 @@ export default function BookingHero() {
         }}>
           {t.bookingSubtitle}
         </p>
-
-        {/* ✅ Steps indicator */}
-        <div style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "8px",
-          marginTop: "24px",
-        }}>
-          {[t.step1Label, t.step2Label, t.step3Label, t.step4Label].map((step) => (
-            <div key={step} style={{
-              backgroundColor: "var(--bg-card)",
-              padding: "6px 14px",
-              borderRadius: "999px",
-              fontSize: "13px",
-              fontWeight: "500",
-              color: "var(--text-primary)",
-              boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-              border: "1px solid var(--border-color)",
-            }}>
-              {step}
-            </div>
-          ))}
-        </div>
 
       </div>
     </section>

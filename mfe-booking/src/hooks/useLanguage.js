@@ -16,11 +16,7 @@ const translations = {
     bookingTitle1:   "Book Your",
     bookingTitle2:   "Cleaning Service",
     bookingSubtitle: "Choose your service, pick a date and time, and we will take care of the rest. Takes less than 2 minutes!",
-    step1Label:      "1. Choose service",
-    step2Label:      "2. Pick date & time",
-    step3Label:      "3. Your details",
-    step4Label:      "4. Confirm",
-
+   
     // ===== STEP LABELS =====
     stepService:  "Service",
     stepDateTime: "Date & Time",
