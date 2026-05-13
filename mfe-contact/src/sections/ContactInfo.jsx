@@ -100,20 +100,6 @@ export default function ContactInfo() {
               {t.areaDesc}
             </p>
 
-            <a href="/booking" style={{
-              display: "inline-block",
-              marginTop: "20px",
-              backgroundColor: "#14b8a6",
-              color: "white",
-              fontSize: "15px",
-              fontWeight: "700",
-              padding: "14px 28px",
-              borderRadius: "12px",
-              textDecoration: "none",
-              boxShadow: "0 4px 12px rgba(20,184,166,0.3)",
-            }}>
-              {"📅"} {t.bookNow}
-            </a>
           </div>
 
         </div>

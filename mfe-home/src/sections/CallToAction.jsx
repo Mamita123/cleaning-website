@@ -78,7 +78,7 @@ export default function CallToAction() {
             { icon: "✅", label: t.noContracts },
             { icon: "🔒", label: t.insured },
             { icon: "💚", label: t.ecoFriendlyBadge },
-            { icon: "⭐", label: t.rated },
+            
           ].map((badge) => (
             <span key={badge.label} style={{
               color: "#ccfbef",

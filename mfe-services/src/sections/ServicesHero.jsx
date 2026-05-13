@@ -59,7 +59,6 @@ export default function ServicesHero() {
         }}>
           {[
             { icon: "🏠", text: t.serviceTypes },
-            { icon: "⭐", text: "4.9 " + t.avgRating },
             { icon: "🌿", text: t.ecoFriendly },
           ].map((item) => (
             <div key={item.text} style={{

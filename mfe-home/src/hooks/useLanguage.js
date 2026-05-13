@@ -16,7 +16,7 @@ const translations = {
     heroBadge:       "Professional Cleaning Services",
     heroTitle1:      "A Cleaner Home,",
     heroTitle2:      "A Happier Life",
-    heroSubtitle:    "J & S Palvelut delivers professional, eco-friendly cleaning services for homes and offices in Helsinki. Founded in 2023, trusted by customers across the city.",
+    heroSubtitle:    "J & S Palvelut delivers professional, eco-friendly cleaning services for homes, offices, stores, window, resturant & bar and store cleaning services in Helsinki, Vantaa and Espoo. Founded in 2023,trusted by customers across the city.",
     bookCleaning:    "Book a Cleaning",
     viewServices:    "View Services",
     happyCustomers:  "Happy Customers",
@@ -49,7 +49,7 @@ const translations = {
     viewAll:        "View All Services →",
 
     // ===== CTA =====
-    ctaTitle:       "Ready for a Sparkling Clean Home?",
+    ctaTitle:       "Ready for a Sparkling Clean?",
     ctaSubtitle:    "Book your first cleaning today and get 20% off. No contracts, no commitments — just a cleaner home.",
     bookOff:        "Book Now — 20% Off",
     contactUs:      "Contact Us",
@@ -96,7 +96,7 @@ const translations = {
     save20:         "Save 20%",
     perMonth:       "/month",
     allPlansInclude: "All plans include our satisfaction guarantee. Not happy? We re-clean for free.",
-    vatNotice:      "Prices exclude VAT (ALV 24%)",
+    vatNotice:      "Prices exclude VAT (ALV 25.5%)",
     vatDesc:        "All prices shown are before VAT. Final invoice will include 24% ALV.",
     kotivah:        "Kotitalousvahennys — Save up to 40%!",
     kotivahDesc:    "Finnish customers can claim a household tax deduction of up to 40% on cleaning services. Ask us for more details!",
@@ -273,14 +273,14 @@ const translations = {
     viewAll:        "Katso kaikki palvelut",
 
     // ===== CTA =====
-    ctaTitle:       "Valmis kiiltavan puhtaaseen kotiin?",
+    ctaTitle:       "Valmis kiiltavan puhtaaseen?",
     ctaSubtitle:    "Varaa ensimmainen siivous tanaan ja saat 20% alennuksen. Ei sopimuksia, ei sitoutumista — vain puhtaampi koti.",
     bookOff:        "Varaa nyt — 20% alennus",
     contactUs:      "Ota yhteytta",
     noContracts:    "Ei sopimuksia",
     insured:        "Vakuutettu ja tarkistettu",
     ecoFriendlyBadge: "Ymparistoystavallinen",
-    rated:          "4.9 arvioitu",
+   
 
     // ===== SERVICES PAGE =====
     servicesBadge:  "Mita tarjoamme",

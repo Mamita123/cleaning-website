@@ -27,10 +27,8 @@ export const translations = {
     heroSubtitle:  "J & S Palvelut delivers professional, eco-friendly cleaning services for homes and offices in Helsinki. Founded in 2023, trusted by customers across the city.",
     quickLinks:    "Quick Links",
     workingHours:  "Working Hours",
-    monday:        "Monday - Friday",
-    saturday:      "Saturday",
-    sunday:        "Sunday",
-    closed:        "Closed",
+    day:        "mon - sun",
+    openEveryday: "Open every day for services",
     kotivahFooter: "Kotitalousvahennys available",
     founded:       "Founded",
 
@@ -236,7 +234,8 @@ export const translations = {
     heroSubtitle:  "J & S Palvelut tarjoaa ammattimaisia siivouspalveluja koteihin ja toimistoihin Helsingissa. Perustettu 2023.",
     quickLinks:    "Pikavalikko",
     workingHours:  "Aukioloajat",
-   openEveryday: "Open everyday for services",
+    day: "ma-su",
+    openEveryday: "Open everyday for services",
     kotivahFooter: "Kotitalousvahennys saatavilla",
     founded:       "Perustettu",
 

@@ -8,7 +8,7 @@ export default function Services() {
     {
       emoji: "🏠",
       title: t.homeClean,
-      price: "From €49",
+      price: "From €35",
       description: t.ecoDesc,
       badge: "Most Popular",
       badgeColor: "#0d9488",
@@ -16,7 +16,7 @@ export default function Services() {
     {
       emoji: "🧹",
       title: t.deepClean,
-      price: "From €99",
+      price: "From €45",
       description: t.guarDesc,
       badge: "Recommended",
       badgeColor: "#7c3aed",
@@ -24,7 +24,7 @@ export default function Services() {
     {
       emoji: "🏢",
       title: t.officeClean,
-      price: "From €79",
+      price: "From €38",
       description: t.vettedDesc,
       badge: "Business",
       badgeColor: "#2563eb",
@@ -32,7 +32,7 @@ export default function Services() {
     {
       emoji: "🛁",
       title: "Move In / Move Out",
-      price: "From €129",
+      price: "From €45",
       description: t.transDesc,
       badge: "Thorough",
       badgeColor: "#d97706",

@@ -100,6 +100,19 @@ export default function PricingCards() {
         : ["Kitchen deep cleaning", "Floor washing and disinfection", "Table and chair cleaning", "Bar counter cleaning", "Toilet disinfection", "Trash removal"],
       popular: false,
     },
+    {
+  id:          "store",
+  emoji:       "🏪",
+  name:        language === "fi" ? "Myymalasiivous" : "Store Cleaning",
+  description: language === "fi"
+    ? "Ammattimainen myymalan siivous asiakkaillesi."
+    : "Professional store and shop cleaning for your customers.",
+  price:       38,
+  features:    language === "fi"
+    ? ["Lattioiden pesu ja kiillotus", "Hyllyjen puhdistus", "Sisaankaynti ja kassaalue", "Nayteikyyneiden puhdistus", "WC-tilojen puhdistus", "Roskien tyhjennys"]
+    : ["Floor washing and polishing", "Shelf and display cleaning", "Entrance and checkout area", "Display case cleaning", "Toilet cleaning", "Trash removal"],
+  popular: false,
+},
   ];
 
   return (
@@ -126,8 +139,8 @@ export default function PricingCards() {
             margin: "0 auto 16px",
           }}>
             {language === "fi"
-              ? "Kaikki hinnat ovat tuntihintoja ilman ALV:ta (25,5%). Minimi varaus 2 tuntia."
-              : "All prices are per hour excluding VAT (25.5%). Minimum booking 2 hours."
+              ? "Kaikki hinnat ovat tuntihintoja ilman ALV:ta (25,5%). "
+              : "All prices are per hour excluding VAT (25.5%). "
             }
           </p>
           <div style={{
@@ -329,8 +342,8 @@ export default function PricingCards() {
             margin: 0,
           }}>
             {language === "fi"
-              ? "Minimi varaus 2 tuntia | Hinnat ilman ALV 25,5%"
-              : "Minimum booking 2 hours | Prices exclude VAT 25.5%"
+              ? "Hinnat ilman ALV 25,5%"
+              : " Prices exclude VAT 25.5%"
             }
           </p>
         </div>

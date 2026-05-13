@@ -25,7 +25,7 @@ export default function PricingHero() {
           fontWeight: "600",
           marginBottom: "24px",
         }}>
-          <span>💰</span>
+         
           <span>{t.pricingBadge}</span>
         </div>
 

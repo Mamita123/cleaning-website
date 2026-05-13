@@ -8,21 +8,18 @@ export default function TeamSection() {
     {
       name: "Jamanta Prasad Gurung",
       role: t.ceoRole,
-      emoji: "👨‍💼",
       bio: t.ceoBio,
       accent: "#14b8a6",
     },
     {
       name: "Md. Mahmudul Hassan Shapan",
       role: t.deputyRole,
-      emoji: "👨‍💼",
       bio: t.deputyBio,
       accent: "#2563eb",
     },
     {
       name: t.teamName3,
       role: t.teamRole3,
-      emoji: "🧹",
       bio: t.teamBio3,
       accent: "#059669",
     },
@@ -88,20 +85,7 @@ export default function TeamSection() {
                 textAlign: "center",
                 borderBottom: "1px solid var(--border-color)",
               }}>
-                <div style={{
-                  width: "80px",
-                  height: "80px",
-                  borderRadius: "50%",
-                  backgroundColor: "var(--bg-secondary)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "2.5rem",
-                  margin: "0 auto 16px",
-                  border: "1px solid var(--border-color)",
-                }}>
-                  {member.emoji}
-                </div>
+                
                 <h3 style={{
                   fontSize: "16px",
                   fontWeight: "700",

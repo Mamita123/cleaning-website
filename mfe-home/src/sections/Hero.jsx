@@ -2,7 +2,7 @@ import React from "react";
 import { useLanguage } from "../hooks/useLanguage";
 
 export default function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section style={{
@@ -39,6 +39,25 @@ export default function Hero() {
            
             <span>{t.heroBadge}</span>
           </div>
+          {/* 24/7 badge */}
+<div style={{
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "8px",
+  backgroundColor: "rgba(20,184,166,0.1)",
+  color: "#0f766e",
+  padding: "6px 16px",
+  borderRadius: "999px",
+  fontSize: "14px",
+  fontWeight: "600",
+  marginBottom: "24px",
+  border: "1px solid rgba(20,184,166,0.3)",
+}}>
+  {"🟢 "}{language === "fi"
+    ? "Auki 24/7 — Varaa milloin tahansa!"
+    : "Open 24/7 — Book anytime!"
+  }
+</div>
 
           {/* ✅ Headline */}
           <h1 style={{
@@ -108,9 +127,7 @@ export default function Hero() {
             marginTop: "48px",
           }}>
             {[
-              { number: "2,000+", label: t.happyCustomers },
-              { number: "4.9★",   label: t.avgRating },
-              { number: "5+",     label: t.yearsExp },
+              
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>
                 <div style={{

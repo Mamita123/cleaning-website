@@ -36,8 +36,8 @@ const translations = {
     findDesc:       "Based in Helsinki, serving customers across the city and surrounding areas.",
     areasServed:    "Areas We Serve",
     areaDesc:       "Not sure if we cover your area? Just send us a message and we will let you know!",
-    workingHours:   "Mon-Fri: 8am-6pm",
-    workingSat:     "Sat: 9am-3pm  |  Sun: Closed",
+    workingHours:   "Mon-sun: 24/7",
+ 
 
     // ===== SERVICE NAMES =====
     homeClean:       "Regular Home Cleaning",
@@ -100,8 +100,8 @@ const translations = {
     findDesc:       "Sijaitsemme Helsingissa ja palvelemme asiakkaita ympari kaupunkia ja lahialueilla.",
     areasServed:    "Palvelualueet",
     areaDesc:       "Etkos sure kattaako alueesi? Laheta meille viesti ja kerromme!",
-    workingHours:   "Ma-Pe: 8-18",
-    workingSat:     "La: 9-15  |  Su: Suljettu",
+    workingHours:   "Ma-Su: 24/7",
+    
 
     // ===== SERVICE NAMES =====
     homeClean:       "Kotisiivous",

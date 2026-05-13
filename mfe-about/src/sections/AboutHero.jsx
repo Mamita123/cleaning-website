@@ -25,7 +25,6 @@ export default function AboutHero() {
           fontWeight: "600",
           marginBottom: "24px",
         }}>
-          <span>👋</span>
           <span>{t.aboutBadge}</span>
         </div>
 
@@ -61,7 +60,7 @@ export default function AboutHero() {
             { number: "2023",  label: t.yearFounded },
             { number: "3",     label: t.teamMembers },
             { number: "€53k",  label: t.revenue2024 },
-            { number: "4.9★",  label: t.avgRating },
+          
           ].map((stat) => (
             <div key={stat.label} style={{
               backgroundColor: "var(--bg-card)",

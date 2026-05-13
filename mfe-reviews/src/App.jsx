@@ -11,7 +11,7 @@ export default function App() {
     <main>
       <ReviewsHero />     {/* Top banner with overall rating */}
       <ReviewsGrid />     {/* Filterable review cards + load more */}
-      <ReviewsSummary />  {/* Star breakdown + CTA banner */}
+    
     </main>
   );
 }

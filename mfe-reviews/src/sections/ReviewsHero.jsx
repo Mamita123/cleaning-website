@@ -25,7 +25,7 @@ export default function ReviewsHero() {
           fontWeight: "600",
           marginBottom: "24px",
         }}>
-          <span>⭐</span>
+         
           <span>{t.reviewsBadge}</span>
         </div>
 
@@ -50,50 +50,7 @@ export default function ReviewsHero() {
           {t.reviewsSubtitle}
         </p>
 
-        {/* ✅ Overall rating card */}
-        <div style={{
-          display: "inline-flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundColor: "var(--bg-card)",
-          padding: "24px 40px",
-          borderRadius: "20px",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
-          border: "1px solid var(--border-color)",
-        }}>
-          <div style={{
-            fontSize: "4rem",
-            fontWeight: "800",
-            color: "#0d9488",
-            lineHeight: "1",
-            marginBottom: "8px",
-          }}>
-            4.9
-          </div>
-          <div style={{
-            display: "flex",
-            gap: "4px",
-            marginBottom: "8px",
-          }}>
-            {[1,2,3,4,5].map((star) => (
-              <span key={star} style={{
-                fontSize: "24px",
-                color: "#f59e0b",
-              }}>
-                {"★"}
-              </span>
-            ))}
-          </div>
-          <div style={{
-            fontSize: "14px",
-            color: "var(--text-secondary)",
-            fontWeight: "500",
-          }}>
-            {t.basedOn}
-          </div>
         </div>
-
-      </div>
     </section>
   );
 }

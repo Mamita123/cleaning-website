@@ -126,7 +126,7 @@ const translations = {
     // ===== ABOUT PAGE — add these missing keys =====
 avgRating:       "Average Rating",
 milestone1Title: "Founded in Helsinki",
-milestone1Desc:  "J & S Palvelut Oy was officially registered on 28 March 2023 by Jamanta and Shapan. Starting with just 1 employee and a vision to provide reliable cleaning services in Helsinki.",
+milestone1Desc:  "J & S Palvelut Oy was officially registered on 28 March 2023. The founder and co-founder have above 15 years of experience in cleaning industry. Starting with just 1 employee and a vision to provide reliable cleaning services in Helsinki, Vantaa and Espoo.",
 milestone2Title: "First Year Success",
 milestone2Desc:  "In our first year we achieved 26,000 euros in revenue with a strong 16.7% profit margin. Word spread quickly about our reliable and professional service.",
 milestone3Title: "Strong Growth",

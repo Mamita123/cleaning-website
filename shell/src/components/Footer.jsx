@@ -181,7 +181,7 @@ export default function Footer() {
               borderBottom: "1px solid rgba(255,255,255,0.1)",
               marginBottom: "16px",
             }}>
-              <span style={{ color: "#99f6e0" }}>Mon - Sun</span>
+              <span style={{ color: "#99f6e0" }}>{t.day}</span>
               <span style={{
                 color: "#14b8a6",
                 fontWeight: "900",
