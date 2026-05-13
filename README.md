@@ -60,6 +60,7 @@ npm install
 
 ### Start all MFEs
 cd cleaning-website
+
 npm start
 
 ### For backend
