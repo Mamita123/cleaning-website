@@ -123,13 +123,13 @@ export default function ContactForm() {
     {
       emoji: "📧",
       title: t.emailLabel,
-      detail: "mahmudul.shapan7@gmail.com",
+      detail: "jspalvelutoy68@gmail.com",
       sub: t.fastResponse,
     },
     {
       emoji: "📍",
       title: t.addressLabel,
-      detail: "Kankarepolku 5 H 451, 00770 Helsinki",
+      detail: "Mätästie 1 J 85, 00770 Helsinki ",
       sub: "00770 Helsinki, Finland",
     },
     {

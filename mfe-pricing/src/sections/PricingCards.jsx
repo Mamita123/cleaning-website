@@ -29,7 +29,7 @@ export default function PricingCards() {
       description: language === "fi"
         ? "Ammattimainen kodin siivous räätälöitynä tarpeisiisi."
         : "Professional home cleaning tailored to your needs.",
-      price:       35,
+      price:       33,
       features:    language === "fi"
         ? ["Pölynimurointi ja pyyhintä", "Keittiön puhdistus", "Kylpyhuoneen puhdistus", "Lattioiden pesu", "Roskien tyhjennys"]
         : ["Vacuuming and dusting", "Kitchen cleaning", "Bathroom cleaning", "Floor washing", "Trash removal"],
@@ -94,7 +94,7 @@ export default function PricingCards() {
       description: language === "fi"
         ? "Ammattimainen siivous ravintoloille ja baareille."
         : "Professional cleaning for restaurants and bars.",
-      price:       40,
+      price:       35,
       features:    language === "fi"
         ? ["Keittiön syväpuhdistus", "Lattioiden pesu ja desinfiointi", "Pöytien ja tuolien puhdistus", "Baaritiskin puhdistus", "WC-tilojen desinfiointi", "Roskien tyhjennys"]
         : ["Kitchen deep cleaning", "Floor washing and disinfection", "Table and chair cleaning", "Bar counter cleaning", "Toilet disinfection", "Trash removal"],
@@ -107,7 +107,7 @@ export default function PricingCards() {
   description: language === "fi"
     ? "Ammattimainen myymalan siivous asiakkaillesi."
     : "Professional store and shop cleaning for your customers.",
-  price:       38,
+  price:       35,
   features:    language === "fi"
     ? ["Lattioiden pesu ja kiillotus", "Hyllyjen puhdistus", "Sisaankaynti ja kassaalue", "Nayteikyyneiden puhdistus", "WC-tilojen puhdistus", "Roskien tyhjennys"]
     : ["Floor washing and polishing", "Shelf and display cleaning", "Entrance and checkout area", "Display case cleaning", "Toilet cleaning", "Trash removal"],

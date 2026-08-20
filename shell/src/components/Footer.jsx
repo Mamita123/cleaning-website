@@ -65,8 +65,8 @@ export default function Footer() {
               {[
                 { icon: "📞", text: "045 181 2636 (Shapan)" },
                 { icon: "📞", text: "040 593 3052 (Jamanta)" },
-                { icon: "📧", text: "mahmudul.shapan7@gmail.com" },
-                { icon: "📍", text: "Kankarepolku 5 H 451, 00770 Helsinki" },
+                { icon: "📧", text: "jspalvelutoy68@gmail.com" },
+                { icon: "📍", text: "Mätästie 1 J 85, 00770 Helsinki" },
               ].map((item) => (
                 <div key={item.text} style={{
                   display: "flex",

@@ -14,14 +14,15 @@ export default function BookingForm({ onConfirm }) {
   const [errors, setErrors] = useState({});
 
   // ✅ Services using translations
-  const services = [
-    { value: "regular",   label: t.regularHome,    price: `${t.from} €49`,  duration: "2-3 h" },
-    { value: "deep",      label: t.deepCleaning,   price: `${t.from} €99`,  duration: "4-6 h" },
-    { value: "office",    label: t.officeCleaning, price: `${t.from} €79`,  duration: "2-4 h" },
-    { value: "moveinout", label: t.moveInOut,      price: `${t.from} €129`, duration: "5-8 h" },
-    { value: "eco",       label: t.ecoFriendly,    price: `${t.from} €59`,  duration: "2-3 h" },
-    { value: "window",    label: t.windowCleaning, price: `${t.from} €39`,  duration: "1-2 h" },
-  ];
+const services = [
+  { value: "home-cleaning",   label: t.homeClean,      price: `€35/${t.hour}` },
+  { value: "deep-cleaning",   label: t.deepClean,      price: `€45/${t.hour}` },
+  { value: "office-cleaning", label: t.officeClean,    price: `€38/${t.hour}` },
+  { value: "move-in-out",     label: t.moveInOut,      price: `€45/${t.hour}` },
+  { value: "window-cleaning", label: t.windowCleaning, price: `€35/${t.hour}` },
+  { value: "restaurant-bar",  label: t.restaurantBar,  price: `€40/${t.hour}` },
+  { value: "store-cleaning",  label: t.storeCleaning,  price: `€38/${t.hour}` },
+];
 
   // ✅ Step labels
   const stepLabels = [t.stepService, t.stepDateTime, t.stepDetails, t.stepConfirm];

@@ -35,7 +35,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "shell",
       remotes: isProduction ? {
-        // ✅ Production — Vercel URLs
+        //  Production — Vercel URLs
           mfeHome:     "mfeHome@https://js-palvelut-home.vercel.app/remoteEntry.js",
           mfeServices: "mfeServices@https://js-palvelut-services.vercel.app/remoteEntry.js",
           mfeBooking:  "mfeBooking@https://js-palvelut-booking.vercel.app/remoteEntry.js",
@@ -45,7 +45,7 @@ module.exports = {
           mfeContact:  "mfeContact@https://js-palvelut-contact.vercel.app/remoteEntry.js",
           mfeAdmin:    "mfeAdmin@https://js-palvelut-admin.vercel.app/remoteEntry.js",
       } : {
-        // ✅ Development — localhost URLs
+        //  Development — localhost URLs
         mfeHome:     "mfeHome@http://localhost:3001/remoteEntry.js",
         mfeServices: "mfeServices@http://localhost:3002/remoteEntry.js",
         mfeBooking:  "mfeBooking@http://localhost:3003/remoteEntry.js",

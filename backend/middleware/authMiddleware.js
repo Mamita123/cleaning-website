@@ -28,6 +28,6 @@ const protect = (req, res, next) => {
   }
 };
 
-// ✅ Export both ways so both imports work!
+//  Export both ways so both imports work!
 module.exports = protect;
 module.exports.protect = protect;

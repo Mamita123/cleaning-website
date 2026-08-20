@@ -16,6 +16,6 @@ pool.connect((err, client, release) => {
   }
 });
 
-// ✅ Export both ways so both imports work!
+// Export both ways so both imports work!
 module.exports = pool;
 module.exports.pool = pool;

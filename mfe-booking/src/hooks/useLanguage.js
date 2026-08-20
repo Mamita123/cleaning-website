@@ -40,12 +40,14 @@ const translations = {
     confirmDesc:  "Please review your booking details before confirming.",
 
     // ===== SERVICE NAMES =====
-    regularHome:    "Regular Home Cleaning",
-    deepCleaning:   "Deep Cleaning",
-    officeCleaning: "Office Cleaning",
-    moveInOut:      "Move In / Move Out",
-    ecoFriendly:    "Eco-Friendly Cleaning",
-    windowCleaning: "Window Cleaning",
+    homeClean:      "Home Cleaning",
+deepClean:      "Deep Cleaning",
+officeClean:    "Office Cleaning",
+moveInOut:      "Move In / Move Out",
+windowCleaning: "Window Cleaning",
+restaurantBar:  "Restaurant and Bar",
+storeCleaning:  "Store Cleaning",
+hour:          "Hour",
 
     // ===== FORM FIELDS =====
     fullName:        "Full Name",
@@ -141,12 +143,14 @@ const translations = {
     confirmDesc:  "Tarkista varauksen tiedot ennen vahvistamista.",
 
     // ===== SERVICE NAMES =====
-    regularHome:    "Kotisiivous",
-    deepCleaning:   "Syvasiivous",
-    officeCleaning: "Toimistosiivous",
-    moveInOut:      "Muuttosaately",
-    ecoFriendly:    "Ymparistoystavallinen",
-    windowCleaning: "Ikkunanpesu",
+    homeClean:      "Kotisiivous",
+deepClean:      "Syvasiivous",
+officeClean:    "Toimistosiivous",
+moveInOut:      "Muuttosaately",
+windowCleaning: "Ikkunanpesu",
+restaurantBar:  "Ravintola ja baari",
+storeCleaning:  "Myymalasiivous",
+hour:          "Tunti",
 
     // ===== FORM FIELDS =====
     fullName:        "Koko nimi",

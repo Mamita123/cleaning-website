@@ -4,9 +4,9 @@ import { useLanguage } from "../hooks/useLanguage";
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
     companyName:  "J & S Palvelut Oy",
-    email:        "info@jspalvelut.fi",
+    email:        "jspalvelutoy68@gmail.com",
     phone:        "+358 451 812 636",
-    address:      "Kankarepolku 5 H 451, 00770 Helsinki",
+    address:      "Mätästie 1 J 85,  00770 Helsinki",
     workingHours: "Mon–Fri: 8am–6pm, Sat: 9am–3pm",
     currency:     "€",
     language:     "English / Finnish",
