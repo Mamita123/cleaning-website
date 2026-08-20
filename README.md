@@ -43,13 +43,13 @@ This project uses Micro Frontend Architecture with 8 independent MFEs:
 
 ## Services Offered
 
-1. Home Cleaning — 35€/hour
+1. Home Cleaning — 33€/hour
 2. Deep Cleaning — 45€/hour
 3. Office Cleaning — 38€/hour
 4. Move In / Move Out — 45€/hour
 5. Window Cleaning — 35€/hour
-6. Restaurant & Bar — 40€/hour
-7. Store Cleaning — 38€/hour
+6. Restaurant & Bar — 35€/hour
+7. Store Cleaning — 35€/hour
 
 *All prices exclude VAT 25.5%*
 
